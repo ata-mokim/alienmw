@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.alienasia.alienmw.dao.RfidOrderDAO"><!--namespace를 통해 UserDAO와 연결합니다. -->
+
+
+		<select id="getList" resultType="com.alienasia.alienmw.dto.RfidOrderDTO">
+		select * from rfid_order where rfid_order_seq > 0
+		<if test="brand != null and brand != '' ">
+			and brand = #{brand}
+		</if>
+
+		<if test="style != null and style != '' ">
+			and style = #{style}
+		</if>
+
+		<if test="factory_name != null and factory_name != '' ">
+			and factory_name = #{factory_name}
+		</if>
+
+		<if test="request_start_date != null and request_start_date != '' ">
+			and request_date between #{request_start_date} and
+			#{request_end_date}
+		</if>
+
+		<if test="confirm_start_date != null and confirm_start_date != '' ">
+			and confirm_date between #{confirm_start_date} and
+			#{confirm_end_date}
+		</if>
+		<if test="status != null and status != '' ">
+			and status = #{status}
+		</if>
+		order by rfid_order_seq desc limit 100
+	</select>
+
+
+
+	<select id="dailyValue" resultType="com.alienasia.alienmw.dto.RfidOrderDTO">
+		select sum(publish_amount) as publish_amount , publish_date from
+		rfid_order where rfid_order_seq > 0
+		<if test="publish_start_date != null and publish_start_date != '' ">
+			and publish_date between #{publish_start_date} and
+			#{publish_end_date}
+		</if>
+		group by publish_date ;
+	</select>
+
+
+
+
+	<insert id="insert">
+	<![CDATA[
+		insert into rfid_order ( reg_date , reg_user_id , style, color, size, order_degree, brand, product_amount, rfid_order_amount , 
+		                         rfid_take_amount, request_date , publish_date , factory_name , factory_code ,
+		                         status, address1, address2, rfid_get_order_seq )
+			values                 (now(), #{reg_user_id}, #{style}, #{color}, #{size}, #{order_degree}, #{brand},#{product_amount},#{rfid_order_amount},   
+			                      #{rfid_take_amount}, date_format(now(), '%Y-%m-%d'), null, #{factory_name}, #{factory_code},
+			                      '0' , #{address1}, #{address2},#{rfid_get_order_seq}	)
+			]]>
+	</insert>
+
+
+
+	<update id="update">
+		<![CDATA[
+		update rfid_order
+		set status = #{status}
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		where rfid_order_seq =  #{rfid_order_seq}
+		]]>
+	</update>
+
+	<update id="revComplete">
+		<![CDATA[
+		update rfid_order
+		set status = #{status}
+		,publish_start_number = #{publish_start_number}
+		,publish_end_number = #{publish_end_number}
+		, confirm_date = date_format(now(), '%Y-%m-%d')
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		,address1 = #{address1}
+  	    ,address2 = #{address2}
+		,confirm_id=#{upd_user_id}
+		where rfid_order_seq =  #{rfid_order_seq}
+		]]>
+	</update>
+
+	<update id="rfidTake">
+		<![CDATA[
+		update rfid_order
+		set rfid_take_amount = #{rfid_take_amount}
+		,status = #{status}	
+		, take_date = date_format(now(), '%Y-%m-%d')
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		where rfid_get_order_seq =  #{rfid_get_order_seq}
+		]]>
+	</update>
+
+
+
+	<update id="statusUpdate">
+		<![CDATA[
+		update rfid_order
+		set status = #{status}
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		where rfid_order_seq =  #{rfid_order_seq}
+		]]>
+	</update>
+
+
+	<update id="publishComplete">
+		<![CDATA[
+		update rfid_order
+		set status = #{status}
+		, publish_date = date_format(now(), '%Y-%m-%d')
+		, publish_amount  = publish_amount +  #{publish_amount}
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		,publish_id=#{publish_id}
+		where rfid_order_seq =  #{rfid_order_seq}
+		]]>
+	</update>
+
+
+
+
+
+	<delete id="delete">
+		<![CDATA[
+		delete from rfid_order
+		where rfid_order_seq =  #{rfid_order_seq}
+		]]>
+	</delete>
+
+</mapper>

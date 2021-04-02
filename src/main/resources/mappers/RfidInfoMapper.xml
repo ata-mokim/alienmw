@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alienasia.alienmw.dao.RfidInfoDAO"><!--namespace를 통해 UserDAO와 연결합니다. -->
+
+
+	<select id="getList" resultType="com.alienasia.alienmw.dto.RfidInfoDTO">
+		select * from rfid_info where epc > '0'
+		<if test="brand != null and brand != '' ">
+			and brand = #{brand}
+		</if>
+		<if test="style != null and style != '' ">
+			and style = #{style}
+		</if>
+		<if test="color != null and color != '' ">
+			and color = #{color}
+		</if>
+		<if test="w_in_start_date != null and w_in_start_date != '' ">
+			and w_in_date between #{w_in_start_date} and
+			#{w_in_end_date}
+		</if>
+		<if test="w_out_start_date != null and w_out_start_date != '' ">
+			and w_out_date between #{w_out_start_date} and
+			#{w_out_end_date}
+		</if>
+
+		<if
+			test="w_return_start_date != null and w_return_start_date != '' ">
+			and w_return_date between #{w_return_start_date} and
+			#{w_return_end_date}
+		</if>
+
+
+		<if
+			test="store_in_start_date != null and store_in_start_date != '' ">
+			and store_in_date between #{store_in_start_date} and
+			#{store_in_end_date}
+		</if>
+
+		<if
+			test="store_sale_start_date != null and store_sale_start_date != '' ">
+			and store_sale_date between #{store_sale_start_date} and
+			#{store_sale_end_date}
+		</if>
+
+		<if
+			test="store_return_start_date != null and store_return_start_date != '' ">
+			and store_return_date between #{store_return_start_date} and
+			#{store_return_end_date}
+		</if>
+
+
+		<if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
+		</if>
+		and status = #{status}
+		order by epc desc limit 100
+	</select>
+
+
+	<select id="read" resultType="com.alienasia.alienmw.dto.RfidInfoDTO">
+	<![CDATA[
+		select * from rfid_info where epc =  #{epc} limit 1
+		]]>
+	</select>
+
+
+	<select id="dailyValueWIn"
+		resultType="com.alienasia.alienmw.dto.RfidInfoDTO">
+		select count(w_in_date) as amount , w_in_date from rfid_info where epc
+		> 0
+		<if test="w_in_start_date != null and w_in_start_date != '' ">
+			and w_in_date between #{w_in_start_date} and
+			#{w_in_end_date}
+		</if>
+		group by w_in_date ;
+	</select>
+
+	<select id="dailyValueWOut"
+		resultType="com.alienasia.alienmw.dto.RfidInfoDTO">
+		select count(w_out_date) as amount , w_out_date from rfid_info where
+		epc > 0
+		<if test="w_out_start_date != null and w_out_end_date != '' ">
+			and w_out_date between #{w_out_start_date} and
+			#{w_out_end_date}
+		</if>
+		group by w_out_date ;
+	</select>
+
+	<select id="dailyValueSIn"
+		resultType="com.alienasia.alienmw.dto.RfidInfoDTO">
+		select count(store_in_date) as amount , store_in_date from rfid_info
+		where epc > 0
+		<if
+			test="store_in_start_date != null and store_in_start_date != '' ">
+			and store_in_date between #{store_in_start_date} and
+			#{store_in_end_date}
+		</if>
+		group by store_in_date ;
+	</select>
+
+	<select id="dailyValueSOut"
+		resultType="com.alienasia.alienmw.dto.RfidInfoDTO">
+		select count(store_sale_date) as amount , store_sale_date from rfid_info
+		where epc > 0
+		<if
+			test="store_sale_start_date != null and store_sale_start_date != '' ">
+			and store_sale_date between #{store_sale_start_date} and
+			#{store_sale_end_date}
+		</if>
+		group by store_sale_date ;
+	</select>
+
+
+	<insert id="insert">
+	<![CDATA[
+		insert into rfid_info ( epc, rfid_tag, rfid_tag_tid,  reg_date , reg_user_id ,  
+		                        rfid_order_seq, rfid_get_order_seq, style, color, size, order_degree, publish_seq, brand,
+		                        status, create_date )  values
+			                  (#{epc}, #{rfid_tag}, #{rfid_tag_tid}, now(),  #{reg_user_id}, 
+			                  #{rfid_order_seq}, #{rfid_get_order_seq}, #{style}, #{color}, #{size}, #{order_degree}, #{publish_seq}, #{brand},
+			                  #{status}, date_format(now(), '%Y-%m-%d'))
+			                  
+			]]>
+	</insert>
+
+
+	<insert id="arrayInsert" parameterType="list">
+		insert into rfid_info ( epc, rfid_tag, rfid_tag_tid,  reg_date , reg_user_id ,  
+		                        rfid_order_seq, rfid_get_order_seq, style, color, size, order_degree, publish_seq, brand,
+		                        status, create_date )  values
+		                        
+		                       <foreach item="rfidInfoDTO" index="index" collection="list"  separator=",">
+				                  (#{rfidInfoDTO.epc}
+				                  ,#{rfidInfoDTO.rfid_tag}
+				                  ,#{rfidInfoDTO.rfid_tag_tid}
+				                  ,now()
+				                  ,#{rfidInfoDTO.reg_user_id}
+				                  ,#{rfidInfoDTO.rfid_order_seq}
+				                  ,#{rfidInfoDTO.rfid_get_order_seq}
+				                  ,#{rfidInfoDTO.style}
+				                  ,#{rfidInfoDTO.color}
+				                  ,#{rfidInfoDTO.size}
+				                  ,#{rfidInfoDTO.order_degree}
+				                  ,#{rfidInfoDTO.publish_seq}
+				                  ,#{rfidInfoDTO.brand}
+				                  ,#{rfidInfoDTO.status}
+				                  ,date_format(now(), '%Y-%m-%d')
+				                  )
+			                   </foreach>
+	</insert>
+
+
+
+	<update id="update">
+		<![CDATA[
+		update rfid_info
+		set status = #{status}
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		where epc =  #{epc}
+		]]>
+	</update>
+	
+	
+
+	<update id="statusUpdate">
+		update rfid_info
+		set status = #{status}
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		<if test="status==4">
+			, w_out_date = date_format(now(), '%Y-%m-%d')
+		</if>
+		<if test="status==6">
+			, store_in_date = date_format(now(), '%Y-%m-%d')
+		</if>
+		<if test="status==10">
+			, w_return_date = date_format(now(), '%Y-%m-%d')
+		</if>
+		<if test="status==7">
+			, store_sale_date = date_format(now(), '%Y-%m-%d')
+		</if>
+		
+		<if test="status==8">
+			, store_return_date = date_format(now(), '%Y-%m-%d')
+		</if>
+		
+		where epc =  #{epc}
+	</update>
+	
+
+	
+
+	<delete id="delete">
+		<![CDATA[
+		delete from rfid_order
+		where epc =  #{epc}
+		]]>
+	</delete>
+
+
+	<select id="getStoreInGroupList"
+		resultType="com.alienasia.alienmw.dto.StoreInGroupListDTO">
+		select store_code, style, color, size, order_degree, count(epc) as
+		count
+		from rfid_info
+		where epc > 0
+		<if test="storeCode != null and storeCode != '' ">
+			and store_code = #{storeCode}
+		</if>
+		<if test="brand != null and brand != '' ">
+			and brand = #{brand}
+		</if>
+		and status in ('8' ,'9' )
+		and w_out_date between #{startDate} and
+		#{endDate}
+		group by store_code,
+		style, color, size, order_degree
+		order by
+		w_out_date desc ;
+	</select>
+
+
+	<select id="getStoreInventoryGroupList"
+		resultType="com.alienasia.alienmw.dto.StoreInGroupListDTO">
+		select store_code, style, color, size, order_degree, count(epc) as
+		count
+		from rfid_info
+		where epc > 0
+		<if test="storeCode != null and storeCode != '' ">
+			and store_code = #{storeCode}
+		</if>
+		<if test="brand != null and brand != '' ">
+			and brand = #{brand}
+		</if>
+		and status in ('10' )
+		and w_out_date between #{startDate} and
+		#{endDate}
+		group by store_code,
+		style, color, size, order_degree
+		order by
+		w_out_date desc ;
+	</select>
+
+
+
+</mapper>
