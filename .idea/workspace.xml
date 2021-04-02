@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89f23ec6-9fd7-4b63-ad9c-8cbfa88a7a2d" name="Default Changelist" comment="" />
+    <list default="true" id="89f23ec6-9fd7-4b63-ad9c-8cbfa88a7a2d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,9 +41,10 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/alienmw" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -53,6 +56,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\LG\IdeaProjects\alienmw\.idea" />
       <recent name="C:\Users\LG\IdeaProjects\alienmw\src\app" />
       <recent name="C:\Users\LG\IdeaProjects\alienmw\src\rfidOrder" />
       <recent name="C:\Users\LG\IdeaProjects\alienmw\src\deptInfo" />
@@ -70,6 +74,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Multirun.DEV">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DEV" type="Multirun" separateTabs="false" reuseTabsWithFailures="false" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="0.0">
       <runConfiguration name="serve" type="npm" />
       <runConfiguration name="AlienmwApplication DEV" type="Spring Boot" />
@@ -135,10 +150,34 @@
       <workItem from="1617320656264" duration="886000" />
       <workItem from="1617324649936" duration="168000" />
       <workItem from="1617324909424" duration="60000" />
+      <workItem from="1617325144506" duration="321000" />
     </task>
+    <task id="LOCAL-00001" summary="add workspace.xml.backup">
+      <created>1617325362934</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1617325362934</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add workspace.xml.backup" />
+    <option name="LAST_COMMIT_MESSAGE" value="add workspace.xml.backup" />
   </component>
 </project>
