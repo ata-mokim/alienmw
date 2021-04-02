@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89f23ec6-9fd7-4b63-ad9c-8cbfa88a7a2d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/LeftMenu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SignIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignIn.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +49,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -56,11 +61,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\LG\IdeaProjects\mw\alienmw\src\views" />
       <recent name="C:\Users\LG\IdeaProjects\alienmw\.idea" />
       <recent name="C:\Users\LG\IdeaProjects\alienmw\src\app" />
       <recent name="C:\Users\LG\IdeaProjects\alienmw\src\rfidOrder" />
       <recent name="C:\Users\LG\IdeaProjects\alienmw\src\deptInfo" />
-      <recent name="C:\Users\LG\IdeaProjects\alienmw\src\main\resources\mappers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\LG\IdeaProjects\alienmw\src\views\app" />
@@ -74,17 +79,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Multirun.DEV">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="DEV" type="Multirun" separateTabs="false" reuseTabsWithFailures="false" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="0.0">
       <runConfiguration name="serve" type="npm" />
       <runConfiguration name="AlienmwApplication DEV" type="Spring Boot" />
@@ -151,6 +145,7 @@
       <workItem from="1617324649936" duration="168000" />
       <workItem from="1617324909424" duration="60000" />
       <workItem from="1617325144506" duration="321000" />
+      <workItem from="1617327574220" duration="1289000" />
     </task>
     <task id="LOCAL-00001" summary="add workspace.xml.backup">
       <created>1617325362934</created>
@@ -175,6 +170,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add workspace.xml.backup" />
