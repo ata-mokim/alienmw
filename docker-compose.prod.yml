@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+
+  alienmw.prod:
+    container_name: alienmw.prod
+    image: hub.rubyon.co.kr/alienmw.prod:latest
+    restart: unless-stopped
+    networks:
+      - frontend
+      - backend
+    ports:
+      - 80:80
+    links:
+      - alienmw.prod-db:mysql
+    depends_on:
+      - alienmw.prod-db
+
+  alienmw.prod-db:
+    container_name: alienmw.prod-db
+    image: mariadb:latest
+    restart: unless-stopped
+    networks:
+      - backend
+    environment:
+      MYSQL_ROOT_PASSWORD: "a113na113n"
+      MYSQL_DATABASE: alienmw
+    volumes:
+      - /Users/rubyon/docker/alienmw-prod/mysql:/var/lib/mysql
+
+networks:
+  frontend:
+  backend:
