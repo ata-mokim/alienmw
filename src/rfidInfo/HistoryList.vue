@@ -17,6 +17,7 @@
           </div>
           <div>
             <el-input
+                id="epcInput"
               size="small"
               placeholder=""
               v-model="epcOption">
@@ -433,7 +434,7 @@ import Axios from 'axios';
 
 
 <style>
-.el-input--small .el-input__inner {
+#epcInput {
    height: 20px !important;
    width : 200px  !important;
    border: 1px solid #f29659 !important;
@@ -444,6 +445,6 @@ import Axios from 'axios';
    font-size: 9px !important;
    cursor: pointer !important;
    padding: 0 6px !important;
-   
+
 }
 </style>

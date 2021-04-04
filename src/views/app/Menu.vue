@@ -34,8 +34,6 @@ export default {
      // 2 이면 reding 먼저 하고 조회 
       goToShopIn(){
 
-        this.$store.test ='asdf';
-
         this.$store.menuName = 'shopIn';
         this.$store.gubun = '1';
         this.$router.push({ name: 'appRfid' })

@@ -125,7 +125,7 @@ export default {
             console.log("address2==================="+res.data.address2+"========================");
 
 
-            this.$router.push({ name: 'leftMenu' })
+            this.$router.push({ name: 'appMenu' })
 
           }else{
             this.$message.error("Username or password is invalid");

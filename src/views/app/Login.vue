@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="login-header">
-      <h2 class="logo">ALIEN M/W</h2>
+      <h2 class="logo">ALIEN M/W 1</h2>
     </div>
     <div class="center">
       
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import SignIn from "@/components/SignIn.vue";
+import SignIn from "@/components/AppSignIn.vue";
 
 
 export default {
@@ -33,7 +33,7 @@ export default {
 };
 </script>W
 
-<style lang="scss">
+<style lang="scss" >
 .login-header {
     padding: 35px 20px;
     display: flex;

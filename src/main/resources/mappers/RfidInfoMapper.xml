@@ -207,15 +207,17 @@
 		count
 		from rfid_info
 		where epc > 0
-		<if test="storeCode != null and storeCode != '' ">
-			and store_code = #{storeCode}
+		<if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
 		</if>
 		<if test="brand != null and brand != '' ">
 			and brand = #{brand}
 		</if>
 		and status in ('8' ,'9' )
-		and w_out_date between #{startDate} and
-		#{endDate}
+		<if test="w_out_start_date != null and w_out_start_date != '' ">
+			and w_out_date between #{w_out_start_date} and
+			#{w_out_end_date}
+		</if>
 		group by store_code,
 		style, color, size, order_degree
 		order by

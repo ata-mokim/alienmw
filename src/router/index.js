@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Main from '../views/Main.vue'
-import LeftMenu from '../views/LeftMenu.vue'
+import leftMenu from '../views/LeftMenu.vue'
 import rfidGetOrder from '../rfidGetOrder/List.vue'
 import RevCompleteList from '../rfidOrder/RevCompleteList.vue'
 import rfidOrderPublishList from '../rfidOrder/PublishList.vue'
@@ -54,9 +54,9 @@ const requireAuth = (value) => (to, from, next) => {
 
 const routes = [
   {
-    path: '/LeftMenu',
-    name: 'LeftMenu',
-    component: LeftMenu,
+    path: '/leftMenu',
+    name: 'leftMenu',
+    component: leftMenu,
     children: [
 
       {

@@ -23,7 +23,9 @@ Vue.config.productionTip = false
 Vue.use(axios)
 Vue.prototype.$http = axios
 // Vue.prototype.$url = 'http://localhost:8080/alienServer'
-Vue.prototype.$url = 'http://localhost:8154'
+Vue.prototype.$url = 'http://192.168.0.30:8154'
+
+
 
 
 new Vue({

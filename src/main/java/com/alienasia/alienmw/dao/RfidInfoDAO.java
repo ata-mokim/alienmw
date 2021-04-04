@@ -20,7 +20,7 @@ public interface RfidInfoDAO {
 	public List<RfidInfoDTO> dailyValueSIn(RfidInfoDTO rfidInfoDTO);
 	public List<RfidInfoDTO> dailyValueSOut(RfidInfoDTO rfidInfoDTO);
 	
-	public List<StoreInGroupListDTO> getStoreInGroupList(StoreInGroupListReq stroreInGroupListReq);
+	public List<StoreInGroupListDTO> getStoreInGroupList(RfidInfoDTO rfidInfoDTO);
 	public List<StoreInGroupListDTO> getStoreInventoryGroupList(StoreInGroupListReq stroreInGroupListReq);
 	public int update (RfidInfoDTO rfidInfoDTO);
 	public int rfidTake (RfidInfoDTO rfidInfoDTO);
