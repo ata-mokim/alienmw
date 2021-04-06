@@ -170,7 +170,19 @@
 		set status = #{status}
 		,upd_date = now()
 		,upd_user_id = #{upd_user_id}
+
+		<if test="status==1">
+			, production_in_date = date_format(now(), '%Y-%m-%d')
+		</if>
+
+		<if test="status==2">
+			, w_in_box_barcode = #{w_in_box_barcode}
+		    , production_out_date = date_format(now(), '%Y-%m-%d')
+		</if>
+
 		<if test="status==4">
+		    , w_out_box_barcode = #{w_out_box_barcode}
+		    , store_code = #{store_code}
 			, w_out_date = date_format(now(), '%Y-%m-%d')
 		</if>
 		<if test="status==6">

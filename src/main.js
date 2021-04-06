@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import router from './router'
-import store from './store'
+import router from './views/router'
+import store from './views/store'
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ko'
 import 'element-ui/lib/theme-chalk/index.css';
@@ -11,7 +11,7 @@ import axios from 'axios'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import "./resource/table.css"
+import "./views/web/resource/table.css"
 
 
 Vue.use(BootstrapVue)
@@ -24,6 +24,7 @@ Vue.use(axios)
 Vue.prototype.$http = axios
 // Vue.prototype.$url = 'http://localhost:8080/alienServer'
 Vue.prototype.$url = 'http://192.168.0.30:8154'
+// Vue.prototype.$url = 'http://localhost:8154'
 
 
 

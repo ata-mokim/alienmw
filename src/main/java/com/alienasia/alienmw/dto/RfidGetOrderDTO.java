@@ -32,8 +32,8 @@ public class RfidGetOrderDTO {
 	private Long rfid_take_amount;
 	private String request_date;
 	private String take_date;
-	private String factory_name;
-	private String factory_code;
+	private String dept_name;
+	private String dept_seq;
 	private String request_start_date;
 	private String request_end_date;
 	private String address1;

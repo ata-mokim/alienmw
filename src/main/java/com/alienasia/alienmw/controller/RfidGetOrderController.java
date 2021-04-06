@@ -7,6 +7,7 @@ import com.alienasia.alienmw.dao.RfidGetOrderDAO;
 import com.alienasia.alienmw.dao.RfidOrderDAO;
 import com.alienasia.alienmw.dto.RfidGetOrderDTO;
 import com.alienasia.alienmw.dto.RfidGetOrderRes;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/rfidGetOrder/*")
+@MapperScan(basePackages="com.alienasia.alienmw.dao")//탐색할 패키시 설정
 public class RfidGetOrderController {
 	
 	@Autowired
@@ -37,8 +39,8 @@ public class RfidGetOrderController {
 	
 	 @RequestMapping(value = "/list",  produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,	MediaType.APPLICATION_ATOM_XML_VALUE}  )
 	 public RfidGetOrderRes list(@RequestBody RfidGetOrderDTO rfidGetOrderDTO) {
-		 
-		 System.out.println("-------------list-------");
+
+		 System.out.println("-------------/rfidGetOrder/list-------");
 		 System.out.println("--------------------" +  rfidGetOrderDTO );
 		 System.out.println("--------------------" );
 		 
@@ -54,8 +56,8 @@ public class RfidGetOrderController {
 	 
 	 @RequestMapping(value = "/rfidOrderReserve",produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,	MediaType.APPLICATION_ATOM_XML_VALUE}  )
 	 public int rfidOrderReserve(@RequestBody List<RfidGetOrderDTO> rfidGetOrderDTO) {
-		 
-		 System.out.println("-------------rfidOrderReserve-------");
+
+		 System.out.println("-------------/rfidGetOrder/rfidOrderReserve-------");
 		 System.out.println("--------------------" +  rfidGetOrderDTO.size() );
 		 System.out.println("--------------------" +  rfidGetOrderDTO);
 //		 System.out.println("--------------------" +  user_id);
@@ -70,23 +72,6 @@ public class RfidGetOrderController {
 		 return res ;
 	 }
 	 
-//	 @RequestMapping(value = "/rfidOrderComplete",produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,	MediaType.APPLICATION_ATOM_XML_VALUE}  )
-//	 public String rfid_order_complete(@RequestBody List<RfidGetOrderDTO> rfidGetOrderDTO) {
-//		 
-//		 System.out.println("-------------modify-------");
-//		 
-//		 System.out.println("--------------------" +  rfidGetOrderDTO.size() );
-//		 
-//		 System.out.println("--------------------" +  rfidGetOrderDTO);
-//			 
-//		 for(int i=0 ; i< rfidGetOrderDTO.size()  ; i++) {  
-//			 			 
-//			 service.rfid_order_complete(rfidGetOrderDTO.get(i)) ;
-//				 
-//		 }
-//		 
-//		 return "success" ;
-//	 }
-	 
+
 	 
 }

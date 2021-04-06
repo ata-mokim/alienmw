@@ -6,6 +6,7 @@ import java.util.List;
 import com.alienasia.alienmw.dao.RfidInfoDAO;
 import com.alienasia.alienmw.dao.RfidOrderDAO;
 import com.alienasia.alienmw.dto.*;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/rfidInfo/*")
+@MapperScan(basePackages="com.alienasia.alienmw.dao")//탐색할 패키시 설정
 public class RfidInfoController {
 
 	@Autowired
@@ -37,9 +39,9 @@ public class RfidInfoController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public RfidInfoRes list(@RequestBody RfidInfoDTO rfidInfoDTO) {
 
-		System.out.println("-------------list-------");
-		System.out.println(rfidInfoDTO.getStatus());
-		System.out.println("-------------list-------");
+		System.out.println("-------------/rfidInfo/list-------");
+		System.out.println(rfidInfoDTO);
+
 
 		if ("".equals(rfidInfoDTO.getStatus()) || null == rfidInfoDTO.getStatus()) {
 			rfidInfoDTO.setStatus("3");
@@ -59,9 +61,9 @@ public class RfidInfoController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public RfidInfoRes read(@RequestBody RfidInfoDTO rfidInfoDTO) {
 
-		System.out.println("-------------list-------");
+		System.out.println("-------------/rfidInfo/read-------");
 		System.out.println(rfidInfoDTO.getEpc());
-		System.out.println("-------------list-------");
+
 
 		RfidInfoRes rfidInfoRes = new RfidInfoRes();
 		rfidInfoRes.setRfidInfoDTO( service.read(rfidInfoDTO) );
@@ -76,16 +78,12 @@ public class RfidInfoController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int statusUpdate(@RequestBody List<RfidInfoDTO> rfidInfoDTO) {
 
-		 System.out.println("-------------modify-------");
+		 System.out.println("-------------/rfidInfo/statusUpdate-------");
 		 System.out.println("--------------------" +  rfidInfoDTO.size() );
 		 int res = 0;
 			 
 		 
-		 for(int i=0 ; i< rfidInfoDTO.size()  ; i++) {  
-			 
-			 System.out.println("--------------------" +  rfidInfoDTO.get(i).getStatus() );
-			 System.out.println("--------------------" +  rfidInfoDTO.get(i).getEpc() );
-			 
+		 for(int i=0 ; i< rfidInfoDTO.size()  ; i++) {
 			 res = res + service.statusUpdate(rfidInfoDTO.get(i)) ;	
 		 }
 		 
@@ -98,13 +96,12 @@ public class RfidInfoController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public RfidInfoRes dailyValueWIn(@RequestBody RfidInfoDTO rfidInfoDTO) {
 
-		System.out.println("-------------list-------");
+		System.out.println("-------------/rfidInfo/dailyValueWIn-------");
 		System.out.println(rfidInfoDTO);
 				
 		RfidInfoRes rfidInfoRes = new RfidInfoRes();
 		rfidInfoRes.setRfidInfoDTO( service.dailyValueWIn(rfidInfoDTO) );
-		
-		System.out.println("-------------list-------");
+
 		System.out.println(rfidInfoRes.getRfidInfoDTO().get(0).getAmount() );
 		 
 		rfidInfoRes.setResultCode(1);
@@ -121,7 +118,7 @@ public class RfidInfoController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public RfidInfoRes dailyValueWOut(@RequestBody RfidInfoDTO rfidInfoDTO) {
 
-		System.out.println("-------------list-------");
+		System.out.println("-------------/rfidInfo/dailyValueWOut-------");
 		System.out.println(rfidInfoDTO);
 				
 		RfidInfoRes rfidInfoRes = new RfidInfoRes();
@@ -137,7 +134,7 @@ public class RfidInfoController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public RfidInfoRes dailyValueSIn(@RequestBody RfidInfoDTO rfidInfoDTO) {
 
-		System.out.println("-------------list-------");
+		System.out.println("-------------/rfidInfo/dailyValueSIn-------");
 		System.out.println(rfidInfoDTO);
 				
 		RfidInfoRes rfidInfoRes = new RfidInfoRes();
@@ -155,7 +152,7 @@ public class RfidInfoController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public RfidInfoRes dailyValueSOut(@RequestBody RfidInfoDTO rfidInfoDTO) {
 
-		System.out.println("-------------list-------");
+		System.out.println("-------------/rfidInfo/dailyValueSOut-------");
 		System.out.println(rfidInfoDTO);
 				
 		RfidInfoRes rfidInfoRes = new RfidInfoRes();
@@ -173,9 +170,9 @@ public class RfidInfoController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public StoreInGroupListRes storeInGroupList(@RequestBody RfidInfoDTO rfidInfoDTO) {
 
-		System.out.println("-------------storeInList-------");
+		System.out.println("-------------/rfidInfo/storeInGroupList-------");
 		System.out.println(rfidInfoDTO);
-		System.out.println("-------------storeInList-------");
+
 
 		// StoreInGroupListRes stroreInGroupListRes = new StoreInGroupListRes();
 
@@ -185,14 +182,7 @@ public class RfidInfoController {
 			rfidInfoDTO.setStatus("8");
 		}
 
-//		if ("".equals(stroreInGroupListReq.getBrand()) || null == stroreInGroupListReq.getBrand()) {
-//			stroreInGroupListRes.setResultCode(0);
-//			stroreInGroupListRes.setResultMessage("fail");
-//			return stroreInGroupListRes;
-//		}
-
 		stroreInGroupListRes.setStoreInGroupListDTO(service.getStoreInGroupList(rfidInfoDTO));
-
 		stroreInGroupListRes.setResultCode(1);
 		stroreInGroupListRes.setResultMessage("success");
 
@@ -203,9 +193,9 @@ public class RfidInfoController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public StoreInGroupListRes storeInventoryGroupList(@RequestBody StoreInGroupListReq stroreInGroupListReq) {
 
-		System.out.println("-------------storeInList-------");
+		System.out.println("-------------/rfidInfo/storeInventoryGroupList-------");
 		System.out.println(stroreInGroupListReq);
-		System.out.println("-------------storeInList-------");
+
 
 		// StoreInGroupListRes stroreInGroupListRes = new StoreInGroupListRes();
 
@@ -233,9 +223,8 @@ public class RfidInfoController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public StatusChangeRes statusChange(@RequestBody StatusChangeReq req) {
 
-		System.out.println("-------------storeInList-------");
+		System.out.println("-------------/rfidInfo/statusChange-------");
 		System.out.println(req);
-		System.out.println("-------------storeInList-------");
 
 		StatusChangeRes res = new StatusChangeRes();
 
@@ -262,7 +251,7 @@ public class RfidInfoController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int insert(@RequestBody List<RfidInfoDTO> rfidInfoDTO) {
 
-		System.out.println("-------------modify-------");
+		System.out.println("-------------/rfidInfo/insert-------");
 		System.out.println("--------------------" + rfidInfoDTO.size());
 		// System.out.println("--------------------" + rfidInfoDTO);
 		int res = 0;
@@ -299,10 +288,7 @@ public class RfidInfoController {
 
 		}
 		
-//		if( 1000 <  rfidInfoDTO.size() )
-//		{
-//			service.arrayInsert(rfidInfoDTO);
-//		}else {
+
 		
 			int j = rfidInfoDTO.size() / 1000;
 			int k = rfidInfoDTO.size() % 1000;
@@ -311,10 +297,7 @@ public class RfidInfoController {
 			
 			for ( i = 0; i <  j ; i++)
 			{
-				System.out.println("----------start----------" + i );
-				System.out.println("----------end ----------" + (i * 1000)  + "/" + ( i * 1000 + 1000 )  );
 				res = res + service.arrayInsert(rfidInfoDTO.subList( (i * 1000) , ( i * 1000 + 1000 ) ) );
-
 			}
 			
 			
@@ -322,8 +305,6 @@ public class RfidInfoController {
 			{
 				res = res + service.arrayInsert(rfidInfoDTO.subList( (i * 1000) , ( i * 1000 + k ) ) );
 			}
-			
-			System.out.println("----------res ----------" + res );
 			
 //		}
 		

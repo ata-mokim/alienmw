@@ -16,8 +16,8 @@
 			and style = #{style}
 		</if>
 
-		<if test="factory_name != null and factory_name != '' ">
-			and factory_name = #{factory_name}
+		<if test="dept_name != null and dept_name != '' ">
+			and dept_name = #{dept_name}
 		</if>
 
 		<if test="request_start_date != null and request_start_date != '' ">
@@ -53,10 +53,10 @@
 	<insert id="insert">
 	<![CDATA[
 		insert into rfid_order ( reg_date , reg_user_id , style, color, size, order_degree, brand, product_amount, rfid_order_amount , 
-		                         rfid_take_amount, request_date , publish_date , factory_name , factory_code ,
+		                         rfid_take_amount, request_date , publish_date , dept_name , dept_seq ,
 		                         status, address1, address2, rfid_get_order_seq )
 			values                 (now(), #{reg_user_id}, #{style}, #{color}, #{size}, #{order_degree}, #{brand},#{product_amount},#{rfid_order_amount},   
-			                      #{rfid_take_amount}, date_format(now(), '%Y-%m-%d'), null, #{factory_name}, #{factory_code},
+			                      #{rfid_take_amount}, date_format(now(), '%Y-%m-%d'), null, #{dept_name}, #{dept_seq},
 			                      '0' , #{address1}, #{address2},#{rfid_get_order_seq}	)
 			]]>
 	</insert>
@@ -97,7 +97,7 @@
 		, take_date = date_format(now(), '%Y-%m-%d')
 		,upd_date = now()
 		,upd_user_id = #{upd_user_id}
-		where rfid_get_order_seq =  #{rfid_get_order_seq}
+		where rfid_order_seq =  #{rfid_order_seq}
 		]]>
 	</update>
 

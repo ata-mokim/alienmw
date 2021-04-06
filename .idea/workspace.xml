@@ -5,19 +5,78 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89f23ec6-9fd7-4b63-ad9c-8cbfa88a7a2d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/AppSignIn.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/controller/ProductionInfoContoroller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/dao/ProductionOutInfoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/dto/ProductionOutInfoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/dto/ProductionOutInfoRes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/ProductionOutInfoMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/app/production/InList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/app/production/OutGroupList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/app/production/OutList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/app/production/Rfid.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SignIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignIn.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AppSignIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/AppSignIn.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BarChart.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/BarChart.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Charts/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/Charts/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DailyValueSIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/DailyValueSIn.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DailyValueSOut.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/DailyValueSOut.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DailyValueWIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/DailyValueWIn.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DailyValueWOut.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/DailyValueWOut.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HelloWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/HelloWorld.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LineChart.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/LineChart.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RfidRead.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/RfidRead.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ShopSale.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/ShopSale.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SignIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/SignIn.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/global.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/components/global.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/deptInfo/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/deptInfo/List.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/sale.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/table.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/controller/DeptInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/controller/DeptInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/controller/RfidGetOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/controller/RfidGetOrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/controller/RfidInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/controller/RfidInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/controller/RfidOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/controller/RfidOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/controller/UserInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/controller/UserInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/dao/DeptInfoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/dao/DeptInfoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/dao/RfidInfoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/dao/RfidInfoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/dto/RfidGetOrderDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/dto/RfidGetOrderDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/dto/RfidOrderDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alienasia/alienmw/dto/RfidOrderDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/RfidGetOrderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/RfidGetOrderMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/RfidInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/RfidInfoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rfidInfo/HistoryList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/rfidInfo/HistoryList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Home.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/app/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/app/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/app/Menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/app/Menu.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/app/Rfid.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/app/Rfid.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/RfidOrderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/RfidOrderMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/app.5d975120.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/chunk-vendors.6c1f886b.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-vendors.6c1f886b.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/app.74a2a43d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/app.74a2a43d.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/chunk-vendors.ae8c3951.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/chunk-vendors.ae8c3951.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resource/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/resource/table.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rfidGetOrder/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/rfidGetOrder/List.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rfidInfo/HistoryList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/rfidInfo/HistoryList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rfidOrder/PublishList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/rfidOrder/PublishList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rfidOrder/PublishStatusList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/rfidOrder/PublishStatusList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rfidOrder/RevCompleteList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/rfidOrder/RevCompleteList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rfidOrder/TakeList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/rfidOrder/TakeList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shop/InList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/shop/InList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shop/ReturnList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/shop/ReturnList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shop/SaleList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/shop/SaleList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shop/WOutList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/shop/WOutList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/user/List.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Main.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Main.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/app/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/app/production/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/app/Menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/app/production/Menu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/app/Rfid.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/app/Table.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/app/production/Table.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/warehouse/InList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/warehouse/InList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/warehouse/OutList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/warehouse/OutList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/warehouse/ReturnList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/web/warehouse/ReturnList.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +86,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -56,7 +115,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../alienmw" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -64,28 +123,67 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Users\LG\AppData\Local\JetBrains\IntelliJ IDEA 2020.3.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\LG\IdeaProjects\mw\alienmw\src\views\app\production" />
+      <recent name="C:\Users\LG\IdeaProjects\mw\alienmw\src\main\resources\mappers" />
+      <recent name="C:\Users\LG\IdeaProjects\mw\alienmw\src\views\app" />
       <recent name="C:\Users\LG\IdeaProjects\mw\alienmw\src\components" />
       <recent name="C:\Users\LG\IdeaProjects\mw\alienmw\src\views" />
-      <recent name="C:\Users\LG\IdeaProjects\alienmw\.idea" />
-      <recent name="C:\Users\LG\IdeaProjects\alienmw\src\app" />
-      <recent name="C:\Users\LG\IdeaProjects\alienmw\src\rfidOrder" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\LG\IdeaProjects\alienmw\src\views\app" />
-      <recent name="C:\Users\LG\IdeaProjects\alienmw\src\user" />
-      <recent name="C:\Users\LG\IdeaProjects\alienmw\src\views" />
+      <recent name="C:\Users\LG\IdeaProjects\mw\alienmw\src\views\app\production" />
+      <recent name="C:\Users\LG\IdeaProjects\mw\alienmw\src\views\router" />
+      <recent name="C:\Users\LG\IdeaProjects\mw\alienmw\src\views\web" />
+      <recent name="C:\Users\LG\IdeaProjects\mw\alienmw\src\views" />
+      <recent name="C:\Users\LG\IdeaProjects\mw\alienmw\src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.alienasia.alienmw.dto" />
-      <recent name="com.alienasia.alienmw.controller" />
       <recent name="com.alienasia.alienmw.dao" />
+      <recent name="com.alienasia.alienmw.controller" />
+      <recent name="com.alienasia.alienmw.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="Multirun.DEV">
+  <component name="RunManager" selected="Spring Boot.AlienmwApplication DEV">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="alienmw [package]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="package" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
     <configuration name="DEV" type="Multirun" separateTabs="false" reuseTabsWithFailures="false" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="0.0">
       <runConfiguration name="serve" type="npm" />
       <runConfiguration name="AlienmwApplication DEV" type="Spring Boot" />
@@ -129,6 +227,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Maven.alienmw [package]" />
       <item itemvalue="Multirun.DEV" />
       <item itemvalue="npm.serve" />
       <item itemvalue="Spring Boot.AlienmwApplication Build" />
@@ -153,6 +252,11 @@
       <workItem from="1617324909424" duration="60000" />
       <workItem from="1617325144506" duration="321000" />
       <workItem from="1617327574220" duration="16328000" />
+      <workItem from="1617579881160" duration="20687000" />
+      <workItem from="1617617574053" duration="2857000" />
+      <workItem from="1617666081931" duration="21438000" />
+      <workItem from="1617695157833" duration="528000" />
+      <workItem from="1617695916001" duration="1517000" />
     </task>
     <task id="LOCAL-00001" summary="add workspace.xml.backup">
       <created>1617325362934</created>
@@ -182,5 +286,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add workspace.xml.backup" />
     <option name="LAST_COMMIT_MESSAGE" value="add workspace.xml.backup" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/views/app/production/Rfid.vue</url>
+          <line>319</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

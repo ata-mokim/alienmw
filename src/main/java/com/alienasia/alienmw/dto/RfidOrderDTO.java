@@ -35,8 +35,8 @@ public class RfidOrderDTO {
 	  private String confirm_date;
 	  private String publish_date;
 	  private String take_date;
-	  private String factory_name;
-	  private String factory_code;
+	  private String dept_name;
+	  private String dept_seq;
 	  private String status;
 	  private String address1;
 	  private String address2;

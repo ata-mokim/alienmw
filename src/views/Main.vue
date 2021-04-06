@@ -19,10 +19,10 @@
 
 <script>
   // import LineChart from '@/components/LineChart'
-  import DailyValueWIn from '@/components/DailyValueWIn'
-  import DailyValueWOut from '@/components/DailyValueWOut'
-  import DailyValueSIn from '@/components/DailyValueSIn'
-  import DailyValueSOut from '@/components/DailyValueSOut'
+  import DailyValueWIn from '@/views/components/DailyValueWIn'
+  import DailyValueWOut from '@/views/components/DailyValueWOut'
+  import DailyValueSIn from '@/views/components/DailyValueSIn'
+  import DailyValueSOut from '@/views/components/DailyValueSOut'
  
   export default {
     components: {

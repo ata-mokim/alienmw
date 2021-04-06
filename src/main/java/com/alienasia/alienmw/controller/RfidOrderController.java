@@ -8,6 +8,7 @@ import com.alienasia.alienmw.dto.DailyValueRes;
 import com.alienasia.alienmw.dto.RfidGetOrderDTO;
 import com.alienasia.alienmw.dto.RfidOrderDTO;
 import com.alienasia.alienmw.dto.RfidOrderRes;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/rfidOrder/*")
+@MapperScan(basePackages="com.alienasia.alienmw.dao")//탐색할 패키시 설정
 public class RfidOrderController {
 
 	@Autowired
@@ -37,13 +39,8 @@ public class RfidOrderController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public RfidOrderRes list(@RequestBody RfidOrderDTO rfidOrderDTO) {
 
-		System.out.println("-------------list-------");
-		System.out.println(rfidOrderDTO.getStatus());
-		System.out.println("-------------list-------");
-
-//		if ("".equals(rfidOrderDTO.getStatus()) || null == rfidOrderDTO.getStatus()) {
-//			rfidOrderDTO.setStatus("0");
-//		}
+		System.out.println("-------------/rfidOrder/list-------");
+		System.out.println(rfidOrderDTO);
 
 		RfidOrderRes rfidOrderRes = new RfidOrderRes();
 		rfidOrderRes.setRfidOrderDTO(service.getList(rfidOrderDTO));
@@ -59,30 +56,26 @@ public class RfidOrderController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int revComplete(@RequestBody List<RfidOrderDTO> rfidOrderDTO) {
 
-		System.out.println("-------------modify-------");
-		System.out.println("--------------------" + rfidOrderDTO.size());
+		System.out.println("-------------/rfidOrder/revComplete-------");
 		System.out.println("--------------------" + rfidOrderDTO);
 		RfidGetOrderDTO rfidGetOrderDTO = new RfidGetOrderDTO();
 		int res = 0;
 
 		for (int i = 0; i < rfidOrderDTO.size(); i++) {
 
-			// rfidGetOrderDTO.getrfid_order_confirm_amount() ���� ������������
+			// rfidGetOrderDTO.getrfid_order_confirm_amount()
 			rfidGetOrderDTO = rfidGetOrderService.read(rfidOrderDTO.get(i).getRfid_get_order_seq());
 
-			// rfidOrder �� �� ����
 			rfidOrderDTO.get(i).setStatus("1");
 			rfidOrderDTO.get(i).setPublish_start_number(rfidGetOrderDTO.getRfid_order_confirm_amount() + 1);
 			rfidOrderDTO.get(i).setPublish_end_number(
 			rfidOrderDTO.get(i).getRfid_order_amount() + rfidGetOrderDTO.getRfid_order_confirm_amount());
-			// rfidOrder ����
 			res = res + service.revComplete(rfidOrderDTO.get(i));
 
 			rfidGetOrderDTO.setRfid_get_order_seq(rfidOrderDTO.get(i).getRfid_get_order_seq());
 			rfidGetOrderDTO.setRfid_order_amount(rfidOrderDTO.get(i).getRfid_order_amount());
 			//rfidGetOrderDTO.setRfid_complete_yn("Y");
 			System.out.println("--------------------" + rfidGetOrderDTO);
-			// rfidGetOrder ����
 			rfidGetOrderService.revComplete(rfidGetOrderDTO);
 		}
 		return res;
@@ -92,8 +85,7 @@ public class RfidOrderController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int rfidReceipt(@RequestBody List<RfidOrderDTO> rfidOrderDTO) {
 
-		System.out.println("-------------modify-------");
-		System.out.println("--------------------" + rfidOrderDTO.size());
+		System.out.println("-------------/rfidOrder/rfidReceipt-------");
 		System.out.println("--------------------" + rfidOrderDTO);
 
 		int res = 0;
@@ -111,7 +103,7 @@ public class RfidOrderController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int rfidPublishStart(@RequestBody List<RfidOrderDTO> rfidOrderDTO) {
 
-		System.out.println("-------------modify-------");
+		System.out.println("-------------/rfidOrder/rfidPublishStart-------");
 		System.out.println("--------------------" + rfidOrderDTO.size());
 		System.out.println("--------------------" + rfidOrderDTO);
 
@@ -126,29 +118,12 @@ public class RfidOrderController {
 		return res;
 	}
 
-//	@RequestMapping(value = "/rfidPublishComplete", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
-//			MediaType.APPLICATION_ATOM_XML_VALUE })
-//	public int rfidPublishComplete(@RequestBody List<RfidOrderDTO> rfidOrderDTO) {
-//
-//		System.out.println("-------------modify-------");
-//		System.out.println("--------------------" + rfidOrderDTO.size());
-//		System.out.println("--------------------" + rfidOrderDTO);
-//		int res = 0;
-//
-//		for (int i = 0; i < rfidOrderDTO.size(); i++) {
-//
-//			rfidOrderDTO.get(i).setStatus("4");
-//			res = res + service.statusUpdate(rfidOrderDTO.get(i));
-//
-//		}
-//		return res;
-//	}
 
 	@RequestMapping(value = "/rfidTakeComplete", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int rfidTakeComplete(@RequestBody List<RfidOrderDTO> rfidOrderDTO) {
 
-		System.out.println("-------------modify-------");
+		System.out.println("-------------/rfidOrder/rfidTakeComplete-------");
 		System.out.println("--------------------" + rfidOrderDTO.size());
 		System.out.println("--------------------" + rfidOrderDTO);
 
@@ -160,7 +135,7 @@ public class RfidOrderController {
 			rfidOrderDTO.get(i).setStatus("5");
 			res = res + service.rfidTake(rfidOrderDTO.get(i));
 
-			// �μ����� update
+			//  update
 			rfidGetOrderDTO.setRfid_get_order_seq(rfidOrderDTO.get(i).getRfid_get_order_seq());
 			rfidGetOrderDTO.setRfid_take_amount(rfidOrderDTO.get(i).getRfid_take_amount());
 			rfidGetOrderService.rfidTake(rfidGetOrderDTO);
@@ -172,7 +147,7 @@ public class RfidOrderController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int remove(@RequestBody List<RfidOrderDTO> rfidOrderDTO) {
 
-		System.out.println("-------------modify-------");
+		System.out.println("-------------/rfidOrder/remove-------");
 		System.out.println("--------------------" + rfidOrderDTO.size());
 		System.out.println("--------------------" + rfidOrderDTO);
 
@@ -188,7 +163,7 @@ public class RfidOrderController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public DailyValueRes dailyValue(@RequestBody RfidOrderDTO rfidOrderDTO) {
 
-		System.out.println("-------------modify-------");
+		System.out.println("-------------/rfidOrder/dailyValue-------");
 		System.out.println("--------------------" + rfidOrderDTO);
 		
 		DailyValueRes dailyValueRes = new DailyValueRes();

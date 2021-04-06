@@ -8,6 +8,7 @@ import com.alienasia.alienmw.dto.LogInReq;
 import com.alienasia.alienmw.dto.LogInRes;
 import com.alienasia.alienmw.dto.UserInfoDTO;
 import com.alienasia.alienmw.dto.UserInfoRes;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/UserInfo/*")
+@MapperScan(basePackages="com.alienasia.alienmw.dao")//탐색할 패키시 설정
 public class UserInfoController {
 
 	@Autowired
@@ -37,7 +39,7 @@ public class UserInfoController {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public LogInRes logIn(@RequestBody LogInReq reqLogInDTO) {
 
-		System.out.println("-------------list-------");
+		System.out.println("-------------/UserInfo/logIn-------");
 		System.out.println(reqLogInDTO);
 		
 		UserInfoDTO userInfoDTO = new UserInfoDTO();
@@ -75,8 +77,8 @@ public class UserInfoController {
 	
 	 @RequestMapping(value = "/list",  produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,	MediaType.APPLICATION_ATOM_XML_VALUE}  )
 	 public UserInfoRes list(@RequestBody UserInfoDTO userInfoDTO) {
-		 
-		 System.out.println("-------------list-------");
+
+		 System.out.println("-------------/UserInfo/list-------");
 		 System.out.println("--------------------" +  userInfoDTO );
 		 System.out.println("--------------------" );
 		 
@@ -92,7 +94,7 @@ public class UserInfoController {
 	@RequestMapping(value = "/update", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int update(@RequestBody List<UserInfoDTO> userInfoDTO) {
-		System.out.println("-------------modify-------");
+		System.out.println("-------------/UserInfo/update-------");
 		System.out.println("--------------------" + userInfoDTO.size());
 		System.out.println("--------------------" + userInfoDTO);
 		int res = 0;
@@ -108,7 +110,7 @@ public class UserInfoController {
 	@RequestMapping(value = "/initPwd", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int initPwd(@RequestBody List<UserInfoDTO> userInfoDTO) {
-		System.out.println("-------------initPwd-------");
+		System.out.println("-------------/UserInfo/initPwd-------");
 		System.out.println("--------------------" + userInfoDTO.size());
 		System.out.println("--------------------" + userInfoDTO);
 		int res = 0;
@@ -119,57 +121,6 @@ public class UserInfoController {
 		}
 		return res;
 	}
-	 
-	
-//	@RequestMapping(value = "/getAssortMaster", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
-//			MediaType.APPLICATION_ATOM_XML_VALUE })
-//	public AssortResult getAssortMaster(@RequestBody AssortResult assortResult) {
-//		
-//		System.out.println("-------------getAssortMaster-------");
-//		
-//		assortResult.setResultCode(1000);
-//		assortResult.setResult(null);
-//		
-//		return assortResult;
-//	}
-	
-	
-//	@RequestMapping(value = "/getStorageExceptInfo", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
-//			MediaType.APPLICATION_ATOM_XML_VALUE })
-//	public AssortResult getStorageExceptInfo(@RequestBody AssortResult assortResult) {
-//		
-//		System.out.println("-------------getStorageExceptInfo-------");
-//		
-//		assortResult.setResultCode(1000);
-//		assortResult.setResult(new ResultDTO());
-//		
-//		return assortResult;
-//	}
-//	
-//	
-//	@RequestMapping(value = "/getStorageSchedules", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
-//			MediaType.APPLICATION_ATOM_XML_VALUE })
-//	public AssortResult getStorageSchedules(@RequestBody AssortResult assortResult) {
-//		
-//		System.out.println("-------------getStorageSchedules-------");
-//		
-//		assortResult.setResultCode(1000);
-//		assortResult.setResult(new ResultDTO());
-//		
-//		return assortResult;
-//	}
-//	
-//	@RequestMapping(value = "/getStorageItems", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
-//			MediaType.APPLICATION_ATOM_XML_VALUE })
-//	public AssortResult getStorageItems(@RequestBody AssortResult assortResult) {
-//		
-//		
-//		System.out.println("-------------getStorageItems-------");
-//		
-//		assortResult.setResultCode(1000);
-//		assortResult.setResult(new ResultDTO());
-//		
-//		return assortResult;
-//	}
+
 
 }
