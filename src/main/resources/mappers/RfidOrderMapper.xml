@@ -16,6 +16,18 @@
 			and style = #{style}
 		</if>
 
+		<if test="color != null and color != '' ">
+			and color = #{color}
+		</if>
+
+		<if test="size != null and size != '' ">
+			and size = #{size}
+		</if>
+
+		<if test="order_degree != null and order_degree != '' ">
+			and order_degree = #{order_degree}
+		</if>
+
 		<if test="dept_name != null and dept_name != '' ">
 			and dept_name = #{dept_name}
 		</if>
@@ -131,7 +143,7 @@
 
 
 
-	<delete id="delete">
+	<delete id="remove">
 		<![CDATA[
 		delete from rfid_order
 		where rfid_order_seq =  #{rfid_order_seq}

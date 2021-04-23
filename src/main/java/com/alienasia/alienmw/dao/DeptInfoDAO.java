@@ -10,7 +10,7 @@ public interface DeptInfoDAO {
 	public DeptInfoDTO get(String userId);
 	public int update (DeptInfoDTO DeptInfoDTO);
 	public void insert  (DeptInfoDTO DeptInfoDTO);
-	public int delete(String userId);
+	public int remove(String userId);
 }
 
 

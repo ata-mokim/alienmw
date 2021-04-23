@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public interface ProductionOutInfoDAO {
-	public int save (ProductionOutInfoDTO productionOutInfoDTO);
+	public int insert (ProductionOutInfoDTO productionOutInfoDTO);
 	public int remove (ProductionOutInfoDTO productionOutInfoDTO);
 	public int rfidInfoStatusUpdate (ProductionOutInfoDTO productionOutInfoDTO);
 	public List<ProductionOutInfoDTO> getList(ProductionOutInfoDTO productionOutInfoDTO);

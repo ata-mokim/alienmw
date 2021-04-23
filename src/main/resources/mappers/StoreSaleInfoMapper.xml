@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alienasia.alienmw.dao.StoreSaleInfoDAO"><!--namespace를 통해 UserDAO와 연결합니다. -->
+
+	<select id="getList" resultType="com.alienasia.alienmw.dto.StoreSaleInfoDTO">
+		select * from store_sale_info where store_sale_info_seq > 0
+		<if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
+		</if>
+		order by reg_date desc limit 100
+	</select>
+
+	<select id="getGroupList" resultType="com.alienasia.alienmw.dto.StoreSaleInfoDTO">
+		select   store_code, style , color, size , count(style) as amount , b.name as store_name  from store_sale_info a, dept_info b
+		where store_sale_info_seq > 0
+		<if test="store_code != null and store_code != '' ">
+			and a.store_code = #{store_code}
+		</if>
+		and b.dept_seq = a.store_code
+		group by store_code, style, color, size
+		order by a.reg_date desc limit 100
+	</select>
+
+	<update id="rfidInfoStatusUpdate">
+		<![CDATA[
+		update rfid_info
+		set status = '7'
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		, store_sale_date = date_format(now(), '%Y-%m-%d')
+		  where epc in (select epc from store_sale_info where store_code = #{store_code} and style = #{style}
+			)
+			OR	rfid_tag in (select epc from store_sale_info where store_code = #{store_code} and style = #{style}
+			)
+		]]>
+	</update>
+
+
+
+	<delete id="remove">
+		<![CDATA[
+		delete from store_sale_info
+		where store_code = #{store_code} and style = #{style}
+		]]>
+	</delete>
+
+
+	<insert id="insert">
+	<![CDATA[
+		insert into store_sale_info (   reg_date , reg_user_id , store_code,   epc,
+			                   rfid_tag, style, color, size, order_degree )  values
+		( now(),  #{reg_user_id}, #{store_code},  #{epc},
+		 #{rfid_tag}, #{style}, #{color}, #{size}, #{order_degree})
+		]]>
+	</insert>
+
+</mapper>

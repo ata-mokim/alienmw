@@ -21,6 +21,9 @@ import store from '../store';
 import userList from '../web/user/List.vue'
 import deptInfoList from '../web/deptInfo/List.vue'
 
+import rfidInfoRePublish from '../web/rfidInfo/RePublish.vue'
+import rfidInfoRePublishList from '../web/rfidInfo/RePublishList.vue'
+
 
 // app
 import appMenu from '../app/production/Menu.vue'
@@ -160,10 +163,21 @@ const routes = [
         name: 'deptInfoList',
         component: deptInfoList,
         beforeEnter: requireAuth('7')
-      }
+      },
+      {
+        path: '/rfidInfo/RePublish',
+        name: 'rfidInfoRePublish',
+        component: rfidInfoRePublish,
+        beforeEnter: requireAuth('8')
+      },
+      {
+        path: '/rfidInfo/RePublishList',
+        name: 'rfidInfoRePublishList',
+        component: rfidInfoRePublishList,
+        beforeEnter: requireAuth('9')
+      },
     ],
   },
-  
   {
     path: '/',
     name: 'Login',

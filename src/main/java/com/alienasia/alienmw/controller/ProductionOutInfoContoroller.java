@@ -2,7 +2,8 @@ package com.alienasia.alienmw.controller;
 
 import com.alienasia.alienmw.dao.ProductionOutInfoDAO;
 import com.alienasia.alienmw.dao.RfidInfoDAO;
-import com.alienasia.alienmw.dto.*;
+import com.alienasia.alienmw.dto.ProductionOutInfoDTO;
+import com.alienasia.alienmw.dto.ProductionOutInfoRes;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/ProductionOutInfo/*")
 @MapperScan(basePackages="com.alienasia.alienmw.dao")//탐색할 패키시 설정
-public class ProductionInfoContoroller {
+public class ProductionOutInfoContoroller {
 
 	@Autowired
 	private ProductionOutInfoDAO service;
@@ -61,17 +62,17 @@ public class ProductionInfoContoroller {
 	}
 
 	
-	@RequestMapping(value = "/save", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
+	@RequestMapping(value = "/insert", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
-	public int save(@RequestBody List<ProductionOutInfoDTO> productionOutInfoDTO) {
+	public int insert(@RequestBody List<ProductionOutInfoDTO> productionOutInfoDTO) {
 
-		 System.out.println("-------------/getGroupList/save-------");
+		 System.out.println("-------------/getGroupList/insert-------");
 		 System.out.println("--------------------" +  productionOutInfoDTO.size() );
 		 int res = 0;
 			 
 		 
 		 for(int i=0 ; i< productionOutInfoDTO.size()  ; i++) {
-			 res = res + service.save(productionOutInfoDTO.get(i)) ;
+			 res = res + service.insert(productionOutInfoDTO.get(i)) ;
 		 }
 		 
 		 return res ;
@@ -80,6 +81,23 @@ public class ProductionInfoContoroller {
 	@RequestMapping(value = "/remove", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int remove(@RequestBody List<ProductionOutInfoDTO> productionOutInfoDTO) {
+
+		System.out.println("-------------/getGroupList/remove-------");
+		System.out.println("--------------------" +  productionOutInfoDTO.size() );
+		int res = 0;
+
+
+		for(int i=0 ; i< productionOutInfoDTO.size()  ; i++) {
+			res = res + service.remove(productionOutInfoDTO.get(i)) ;
+		}
+
+		return res ;
+	}
+
+
+	@RequestMapping(value = "/productionOut", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
+			MediaType.APPLICATION_ATOM_XML_VALUE })
+	public int productionOut(@RequestBody List<ProductionOutInfoDTO> productionOutInfoDTO) {
 
 		System.out.println("-------------/getGroupList/remove-------");
 		System.out.println("--------------------" +  productionOutInfoDTO.size() );

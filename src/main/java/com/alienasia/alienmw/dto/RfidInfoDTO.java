@@ -31,7 +31,9 @@ public class RfidInfoDTO {
 	  private String publish_seq;
 	  private String brand;  
 	  private String status;
-	  private String create_date;	  
+	  private String create_date;
+	  private String production_in_date;
+	  private String production_out_date;
 	  private String w_in_date;
 	  private String w_out_date;	
 	  private String w_return_date;
@@ -59,4 +61,7 @@ public class RfidInfoDTO {
 	  private String store_return_start_date;
 	  private String store_return_end_date;
 	  private Long amount;
+	  private Long dept_seq;
+	  private String dept_name;
+	  private String store_name;
 }

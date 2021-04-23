@@ -31,7 +31,6 @@
         <template slot="title" text-color="#ffd04b" >
               RFID 주문 (생산처)
           </template>
-      
 
       <router-link to="/rfidGetOrder/List">
           <el-menu-item index="1-1" >
@@ -45,17 +44,17 @@
         </el-menu-item>
       </router-link>
 
-        <router-link to="/rfidOrder/PublishStatusList">
+       <router-link to="/rfidOrder/TakeList">
           <el-menu-item index="1-3" >
-            발행 진행 조회
+            RFID 인수 </el-menu-item>
+       </router-link>
+
+        <router-link to="/rfidOrder/PublishStatusList">
+          <el-menu-item index="1-4" >
+            발행 상태 조회
           </el-menu-item>
         </router-link>
 
-       <router-link to="/rfidOrder/TakeList">
-          <el-menu-item index="1-4" >
-           
-            RFID 인수 </el-menu-item>
-       </router-link>
 
       </el-submenu>
 
@@ -166,6 +165,34 @@
       </el-menu-item>
 
 
+         <el-submenu index="9"
+          v-if="isMenuVIf[7]"
+         >
+           <template slot="title" text-color="#ffd04b" >
+             RFID 재발행
+           </template>
+           <router-link to="/rfidInfo/RePublish">
+             <el-menu-item index="9-1" >
+               RFID 재발행 요청
+             </el-menu-item>
+           </router-link>
+
+           <router-link to="/rfidInfo/RePublishList">
+             <el-menu-item index="9-2" >
+               RFID 재발행 출력
+             </el-menu-item>
+           </router-link>
+
+       </el-submenu>
+
+
+
+
+
+
+
+
+
       <!-- <el-submenu index="3">
         <template slot="title"><i class="el-icon-setting"></i>Setting </template>
           <el-menu-item index="3-1">Option 1</el-menu-item>
@@ -230,7 +257,7 @@
       this.$router.push({ name: 'Main' })
       console.log("======created=============="+this.$store.state.accessToken+"=============================");
 
-      for(var i=0; i< 7; i++){
+      for(var i=0; i< 9; i++){
         this.isMenuVIf[i] = false;
       }
 
@@ -240,7 +267,7 @@
             this.isMenuVIf[i] = true;
           }
         
-      }else if (this.$store.state.accessToken == 1)
+      }else if (this.$store.state.accessToken == 1)  // 생산은 생산메뉴만
       {
           for( i in this.isMenuVIf){
             if (i == 0){
@@ -249,7 +276,7 @@
               this.isMenuVIf[i] = false;
             }
           }
-      }else if (this.$store.state.accessToken == 2)
+      }else if (this.$store.state.accessToken == 2)  // 발행은 발행 메뉴만
       {
           for( i in this.isMenuVIf){
             if (i == 1){

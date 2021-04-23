@@ -12,7 +12,7 @@ public interface UserInfoDAO {
 	public UserInfoDTO get(String userId);
 	public int update (UserInfoDTO userInfoDTO);
 	public void insert  (UserInfoDTO userInfoDTO);
-	public int delete(String userId);	
+	public int remove(String userId);
 	
 	public int lastLogIn (UserInfoDTO userInfoDTO);
 	public int logInFail (UserInfoDTO userInfoDTO);

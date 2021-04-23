@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alienasia.alienmw.dao.WarehouseOutInfoDAO"><!--namespace를 통해 UserDAO와 연결합니다. -->
+
+	<select id="getList" resultType="com.alienasia.alienmw.dto.WarehouseOutInfoDTO">
+		select * from warehouse_out_info where warehouse_out_info_seq > 0
+		<if test="dept_seq != null and dept_seq != '' ">
+			and dept_seq = #{dept_seq}
+		</if>
+		<if test="w_out_box_barcode != null and w_out_box_barcode != '' ">
+			and w_out_box_barcode = #{w_out_box_barcode}
+		</if>
+		order by reg_date desc limit 100
+	</select>
+
+	<select id="getGroupList" resultType="com.alienasia.alienmw.dto.WarehouseOutInfoDTO">
+		select  w_out_box_barcode, style, color, size , count(w_out_box_barcode) as amount, store_code from warehouse_out_info where warehouse_out_info_seq > 0
+		<if test="dept_seq != null and dept_seq != '' ">
+			and dept_seq = #{dept_seq}
+		</if>
+		<if test="w_out_box_barcode != null and w_out_box_barcode != '' ">
+			and w_out_box_barcode = #{w_out_box_barcode}
+		</if>
+		group by w_out_box_barcode, style,color, size, store_code
+		order by reg_date desc limit 100
+	</select>
+
+	<update id="rfidInfoStatusUpdate">
+		<![CDATA[
+		update rfid_info
+		set status = '4'
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		, w_out_box_barcode = #{w_out_box_barcode}
+		, w_out_date = date_format(now(), '%Y-%m-%d')
+		, store_code = #{store_code}
+		  where epc in (select epc from warehouse_out_info where w_out_box_barcode =  #{w_out_box_barcode}
+	        and style =  #{style}
+			)
+		]]>
+	</update>
+
+
+
+	<delete id="remove">
+		<![CDATA[
+		delete from warehouse_out_info
+		where w_out_box_barcode =  #{w_out_box_barcode}
+		]]>
+	</delete>
+
+
+	<insert id="insert">
+	<![CDATA[
+		insert into warehouse_out_info (   reg_date , reg_user_id , dept_seq,  w_out_box_barcode, epc,
+			                   rfid_tag, style, color, size, order_degree, store_code )  values
+		( now(),  #{reg_user_id}, #{dept_seq}, #{w_out_box_barcode}, #{epc},
+		 #{rfid_tag}, #{style}, #{color}, #{size}, #{order_degree}, #{store_code})
+		]]>
+	</insert>
+
+</mapper>

@@ -303,8 +303,10 @@ import Axios from 'axios';
       this.$store.commit("dayBefore",7);
       this.requestStartDateOption = this.$store.state.dateOption; // 조회조건이서 현재보다 -7 일
 
-      if (this.$store.state.userId != 'admin')
+      if (this.$store.state.userId != 'admin') {
+        this.deptSeqOption = this.$store.state.deptSeq;
         this.deptNameOption = this.$store.state.deptName;
+      }
 
     },//created
     data() {
@@ -339,6 +341,7 @@ import Axios from 'axios';
         brandOption: '',
         styleOption :'',
         deptNameOption:'',
+        deptSeqOption:0,
         requestStartDateOption:'',
         requestEndDateOption:'',
         statusOption:'임시저장',
@@ -355,9 +358,9 @@ import Axios from 'axios';
         var reqJson = new Object();
         reqJson.brand = this.brandOption;
         reqJson.style = this.styleOption;
-        reqJson.dept_name = this.deptNameOption;
-        reqJson.request_start_date = this.requestStartDateOption;
-        reqJson.request_end_date = this.requestEndDateOption;
+        reqJson.deps_seq = this.deptSeqOption ;
+        // reqJson.request_start_date = this.requestStartDateOption;
+        // reqJson.request_end_date = this.requestEndDateOption;
         reqJson.status = '0';
 
         await Axios.post(url, reqJson , this.$store.state.config ).then(res => { 

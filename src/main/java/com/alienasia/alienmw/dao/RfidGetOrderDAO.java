@@ -11,7 +11,7 @@ public interface RfidGetOrderDAO {
 	public List<RfidGetOrderDTO> getList(RfidGetOrderDTO rfidGetOrderDTO);
 	public List<RfidGetOrderDTO> getSearchList(RfidGetOrderDTO rfidGetOrderDTO);
 	public RfidGetOrderDTO read(Long rfid_get_order_seq);
-	public int delete(Long rfid_get_order_seq);
+	public int remove(Long rfid_get_order_seq);
 	public int update (RfidGetOrderDTO rfidGetOrderDTO);
 	public int revComplete (RfidGetOrderDTO rfidGetOrderDTO);
 	public int rfidOrderReserve (RfidGetOrderDTO rfidGetOrderDTO);

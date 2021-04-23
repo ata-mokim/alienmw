@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.alienasia.alienmw.dao.RePublishInfoDAO"><!--namespace를 통해 UserDAO와 연결합니다. -->
+
+
+		<select id="getList" resultType="com.alienasia.alienmw.dto.RePublishInfoDTO">
+		select * from re_publish_info where re_publish_info_seq > 0
+
+		<if test="style != null and style != '' ">
+			and style = #{style}
+		</if>
+
+		<if test="color != null and color != '' ">
+			and color = #{color}
+		</if>
+
+		<if test="size != null and size != '' ">
+			and size = #{size}
+		</if>
+
+		<if test="order_degree != null and order_degree != '' ">
+			and order_degree = #{order_degree}
+		</if>
+
+		<if test="publish_seq != null and publish_seq != '' ">
+			and publish_seq = #{publish_seq}
+		</if>
+
+		<if test="dept_name != null and dept_name != '' ">
+			and dept_name = #{dept_name}
+		</if>
+		<if test="status != null and status != '' ">
+			and status = #{status}
+		</if>
+		order by re_publish_info_seq desc limit 100
+	</select>
+
+
+
+
+
+
+	<insert id="insert">
+	<![CDATA[
+		insert into re_publish_info ( reg_date , reg_user_id , style, color, size, order_degree, publish_seq,  dept_name , dept_seq ,
+		                         status, address1, address2, request_date , publish_date )
+			values                 (now(), #{reg_user_id}, #{style}, #{color}, #{size}, #{order_degree}, #{publish_seq},#{dept_name},#{dept_seq},
+			                      '0', #{address1}, #{address2},#{request_date}, #{publish_date} )
+			]]>
+	</insert>
+
+
+	<update id="statusUpdate">
+		<![CDATA[
+		update re_publish_info
+		set status = #{status}
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		where re_publish_info_seq =  #{re_publish_info_seq}
+		]]>
+	</update>
+
+	<delete id="remove">
+		<![CDATA[
+		delete from re_publish_info
+		where re_publish_info_seq =  #{re_publish_info_seq}
+		]]>
+	</delete>
+
+</mapper>

@@ -91,14 +91,7 @@
                   :value="item.value">
                 </el-option>
               </el-select>
-
-
           </div>
-
-
-
-
-
       </div>
 
       <!-- 조회 조건 영역 -->
@@ -376,8 +369,10 @@ import XLSX from 'xlsx'
       this.$store.commit("dayBefore",7);
       this.confirmStartDateOption = this.$store.state.dateOption; // 조회조건이서 현재보다 -7 일
 
-      if (this.$store.state.userId != 'admin')
+      if (this.$store.state.userId != 'admin') {
+        this.deptSeqOption = this.$store.state.deptSeq;
         this.deptNameOption = this.$store.state.deptName;
+      }
 
     },//created    
     data() {
@@ -429,6 +424,7 @@ import XLSX from 'xlsx'
         brandOption: '',
         styleOption :'',
         deptNameOption:'',
+        deptSeqOption:0,
         confirmStartDateOption:'',
         confirmEndDateOption:'',
         statusOption:'',
@@ -450,7 +446,8 @@ import XLSX from 'xlsx'
         var reqJson = new Object();
         reqJson.brand = this.brandOption;
         reqJson.style = this.styleOption;
-        reqJson.dept_name = this.deptNameOption;
+        // reqJson.dept_name = this.deptNameOption;
+        reqJson.dept_seq = this.deptSeqOption;
         reqJson.confirm_start_date = this.confirmStartDateOption;
         reqJson.confirm_end_date = this.confirmEndDateOption;
       

@@ -62,12 +62,31 @@ public class RfidInfoController {
 	public RfidInfoRes read(@RequestBody RfidInfoDTO rfidInfoDTO) {
 
 		System.out.println("-------------/rfidInfo/read-------");
-		System.out.println(rfidInfoDTO.getEpc());
+		System.out.println(rfidInfoDTO.getRfid_tag());
 
 
 		RfidInfoRes rfidInfoRes = new RfidInfoRes();
 		rfidInfoRes.setRfidInfoDTO( service.read(rfidInfoDTO) );
 		 
+		rfidInfoRes.setResultCode(1);
+		rfidInfoRes.setResultMessage("success");
+
+		return rfidInfoRes;
+	}
+
+	@RequestMapping(value = "/search", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
+			MediaType.APPLICATION_ATOM_XML_VALUE })
+	public RfidInfoRes search(@RequestBody RfidInfoDTO rfidInfoDTO) {
+
+		System.out.println("-------------/rfidInfo/search-------");
+		System.out.println(rfidInfoDTO.getRfid_tag());
+
+
+		RfidInfoRes rfidInfoRes = new RfidInfoRes();
+		rfidInfoRes.setRfidInfoDTO( service.search(rfidInfoDTO) );
+
+
+
 		rfidInfoRes.setResultCode(1);
 		rfidInfoRes.setResultMessage("success");
 
@@ -166,20 +185,17 @@ public class RfidInfoController {
 	
 	
 
-	@RequestMapping(value = "/storeInGroupList", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
+	@RequestMapping(value = "/getStoreInGroupList", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
-	public StoreInGroupListRes storeInGroupList(@RequestBody RfidInfoDTO rfidInfoDTO) {
+	public StoreInGroupListRes getStoreInGroupList(@RequestBody RfidInfoDTO rfidInfoDTO) {
 
 		System.out.println("-------------/rfidInfo/storeInGroupList-------");
 		System.out.println(rfidInfoDTO);
 
-
-		// StoreInGroupListRes stroreInGroupListRes = new StoreInGroupListRes();
-
 		StoreInGroupListRes stroreInGroupListRes = new StoreInGroupListRes();
 
 		if ("".equals(rfidInfoDTO.getStatus()) || null == rfidInfoDTO.getStatus()) {
-			rfidInfoDTO.setStatus("8");
+			rfidInfoDTO.setStatus("4");
 		}
 
 		stroreInGroupListRes.setStoreInGroupListDTO(service.getStoreInGroupList(rfidInfoDTO));
@@ -189,63 +205,87 @@ public class RfidInfoController {
 		return stroreInGroupListRes;
 	}
 
-	@RequestMapping(value = "/storeInventoryGroupList", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
+	@RequestMapping(value = "/getWarehouseInOutGroupList", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
-	public StoreInGroupListRes storeInventoryGroupList(@RequestBody StoreInGroupListReq stroreInGroupListReq) {
+	public StoreInGroupListRes getWarehouseInOutGroupList(@RequestBody RfidInfoDTO rfidInfoDTO) {
 
-		System.out.println("-------------/rfidInfo/storeInventoryGroupList-------");
-		System.out.println(stroreInGroupListReq);
-
-
-		// StoreInGroupListRes stroreInGroupListRes = new StoreInGroupListRes();
+		System.out.println("-------------/rfidInfo/warehouseInGroupList-------");
+		System.out.println(rfidInfoDTO);
 
 		StoreInGroupListRes stroreInGroupListRes = new StoreInGroupListRes();
 
-		if ("".equals(stroreInGroupListReq.getStatus()) || null == stroreInGroupListReq.getStatus()) {
-			stroreInGroupListReq.setStatus("10");
+		if ("".equals(rfidInfoDTO.getStatus()) || null == rfidInfoDTO.getStatus()) {
+			rfidInfoDTO.setStatus("2");
 		}
 
-		if ("".equals(stroreInGroupListReq.getBrand()) || null == stroreInGroupListReq.getBrand()) {
-			stroreInGroupListRes.setResultCode(0);
-			stroreInGroupListRes.setResultMessage("fail");
-			return stroreInGroupListRes;
-		}
-
-		stroreInGroupListRes.setStoreInGroupListDTO(service.getStoreInventoryGroupList(stroreInGroupListReq));
-
+		stroreInGroupListRes.setStoreInGroupListDTO(service.getWarehouseInOutGroupList(rfidInfoDTO));
 		stroreInGroupListRes.setResultCode(1);
 		stroreInGroupListRes.setResultMessage("success");
+
+		System.out.println(stroreInGroupListRes);
 
 		return stroreInGroupListRes;
 	}
 
-	@RequestMapping(value = "/statusChange", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
-			MediaType.APPLICATION_ATOM_XML_VALUE })
-	public StatusChangeRes statusChange(@RequestBody StatusChangeReq req) {
 
-		System.out.println("-------------/rfidInfo/statusChange-------");
-		System.out.println(req);
 
-		StatusChangeRes res = new StatusChangeRes();
+//	@RequestMapping(value = "/storeInventoryGroupList", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
+//			MediaType.APPLICATION_ATOM_XML_VALUE })
+//	public StoreInGroupListRes storeInventoryGroupList(@RequestBody StoreInGroupListReq stroreInGroupListReq) {
+//
+//		System.out.println("-------------/rfidInfo/storeInventoryGroupList-------");
+//		System.out.println(stroreInGroupListReq);
+//
+//
+//		// StoreInGroupListRes stroreInGroupListRes = new StoreInGroupListRes();
+//
+//		StoreInGroupListRes stroreInGroupListRes = new StoreInGroupListRes();
+//
+//		if ("".equals(stroreInGroupListReq.getStatus()) || null == stroreInGroupListReq.getStatus()) {
+//			stroreInGroupListReq.setStatus("10");
+//		}
+//
+//		if ("".equals(stroreInGroupListReq.getBrand()) || null == stroreInGroupListReq.getBrand()) {
+//			stroreInGroupListRes.setResultCode(0);
+//			stroreInGroupListRes.setResultMessage("fail");
+//			return stroreInGroupListRes;
+//		}
+//
+//		stroreInGroupListRes.setStoreInGroupListDTO(service.getStoreInventoryGroupList(stroreInGroupListReq));
+//
+//		stroreInGroupListRes.setResultCode(1);
+//		stroreInGroupListRes.setResultMessage("success");
+//
+//		return stroreInGroupListRes;
+//	}
 
-		if ("".equals(req.getStatus()) || null == req.getStatus()) {
-			res.setResultCode(0);
-			res.setResultMessage("fail");
-			return res;
-		}
-
-		for (String epc : req.getEpc()) {
-			RfidInfoDTO RfidInfoDTO = new RfidInfoDTO();
-			RfidInfoDTO.setEpc(epc);
-			RfidInfoDTO.setStatus(req.getStatus());
-			service.update(RfidInfoDTO);
-		}
-
-		res.setResultCode(1);
-		res.setResultMessage("success");
-
-		return res;
-	}
+//	@RequestMapping(value = "/statusChange", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
+//			MediaType.APPLICATION_ATOM_XML_VALUE })
+//	public StatusChangeRes statusChange(@RequestBody StatusChangeReq req) {
+//
+//		System.out.println("-------------/rfidInfo/statusChange-------");
+//		System.out.println(req);
+//
+//		StatusChangeRes res = new StatusChangeRes();
+//
+//		if ("".equals(req.getStatus()) || null == req.getStatus()) {
+//			res.setResultCode(0);
+//			res.setResultMessage("fail");
+//			return res;
+//		}
+//
+//		for (String epc : req.getEpc()) {
+//			RfidInfoDTO RfidInfoDTO = new RfidInfoDTO();
+//			RfidInfoDTO.setEpc(epc);
+//			RfidInfoDTO.setStatus(req.getStatus());
+//			service.update(RfidInfoDTO);
+//		}
+//
+//		res.setResultCode(1);
+//		res.setResultMessage("success");
+//
+//		return res;
+//	}
 
 	@RequestMapping(value = "/insert", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
@@ -262,18 +302,13 @@ public class RfidInfoController {
 
 		for (int i = 0; i < rfidInfoDTO.size(); i++) {
 
-//			res = res + service.insert(rfidInfoDTO.get(i));
-
 			if (rfid_order_seq != rfidInfoDTO.get(i).getRfid_order_seq()) {
-				
 				count = 0;
-				
 				if (rfid_order_seq == 0) {
 					rfid_order_seq = rfidInfoDTO.get(i).getRfid_order_seq();
 					count ++;
 					continue;
 				} else {
-
 					rfidOrderDTO.setStatus("4");
 					rfidOrderDTO.setRfid_order_seq(rfid_order_seq);
 					rfidOrderDTO.setPublish_amount(Long.valueOf(i) );
@@ -287,19 +322,17 @@ public class RfidInfoController {
 			rfid_order_seq =  rfidInfoDTO.get(i).getRfid_order_seq();
 
 		}
-		
 
-		
 			int j = rfidInfoDTO.size() / 1000;
 			int k = rfidInfoDTO.size() % 1000;
 			int i = 0;
-			
-			
+
 			for ( i = 0; i <  j ; i++)
 			{
 				res = res + service.arrayInsert(rfidInfoDTO.subList( (i * 1000) , ( i * 1000 + 1000 ) ) );
 			}
-			
+
+			System.out.println("--------------------" + j + "//" + k +"//" + i +"//");
 			
 			if ( k > 0)
 			{

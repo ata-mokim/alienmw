@@ -50,6 +50,15 @@
 			#{store_return_end_date}
 		</if>
 
+		<if
+			test="w_in_box_barcode != null and w_in_box_barcode != '' ">
+			and w_in_box_barcode = #{w_in_box_barcode}
+		</if>
+
+		<if
+				test="w_out_box_barcode != null and w_out_box_barcode != '' ">
+			and w_out_box_barcode = #{w_out_box_barcode}
+		</if>
 
 		<if test="store_code != null and store_code != '' ">
 			and store_code = #{store_code}
@@ -60,10 +69,35 @@
 
 
 	<select id="read" resultType="com.alienasia.alienmw.dto.RfidInfoDTO">
-	<![CDATA[
-		select * from rfid_info where epc =  #{epc} limit 1
-		]]>
+		select * from rfid_info where
+		<if test="epc != null and epc != '' ">
+	     epc =  #{epc}
+		</if>
+		<if test="rfid_tag != null and rfid_tag != '' ">
+			rfid_tag =  #{rfid_tag}
+		</if>
 	</select>
+
+	<select id="search" resultType="com.alienasia.alienmw.dto.RfidInfoDTO">
+		select a.* , b.dept_seq  as dept_seq, b.dept_name  as dept_name,
+		(select name from dept_info where dept_seq = a.store_code ) as store_name
+		from rfid_info a ,rfid_get_order b  where
+-- 		, b.dept_seq  as dept_seq, b.dept_name  as dept_name , c.name as store_name
+-- 		    a, rfid_order b , dept_info c  where
+		<if test="epc != null and epc != '' ">
+			epc =  #{epc}
+		</if>
+		<if test="rfid_tag != null and rfid_tag != '' ">
+			rfid_tag =  #{rfid_tag}
+		</if>
+		and a.style = b.style
+		and a.color = b.color
+		and a.size = b.size
+		and a.order_degree = b.order_degree
+-- 		and a.store_code = c.dept_seq
+	</select>
+
+
 
 
 	<select id="dailyValueWIn"
@@ -162,8 +196,17 @@
 		where epc =  #{epc}
 		]]>
 	</update>
-	
-	
+
+	<update id="productionInUpdate">
+		<![CDATA[
+		update rfid_info
+		set status = #{status}
+		  ,upd_date = now()
+		  ,upd_user_id = #{upd_user_id}
+		  ,production_in_date = date_format(now(), '%Y-%m-%d')
+		where rfid_order_seq  =  #{rfid_order_seq}
+		]]>
+	</update>
 
 	<update id="statusUpdate">
 		update rfid_info
@@ -205,7 +248,7 @@
 
 	
 
-	<delete id="delete">
+	<delete id="remove">
 		<![CDATA[
 		delete from rfid_order
 		where epc =  #{epc}
@@ -218,23 +261,48 @@
 		select store_code, style, color, size, order_degree, count(epc) as
 		count
 		from rfid_info
-		where epc > 0
+		where
 		<if test="store_code != null and store_code != '' ">
-			and store_code = #{store_code}
+			 store_code = #{store_code}
 		</if>
 		<if test="brand != null and brand != '' ">
 			and brand = #{brand}
 		</if>
-		and status in ('8' ,'9' )
+		<if test="w_out_box_barcode != null and w_out_box_barcode != '' ">
+		and	w_out_box_barcode = #{w_out_box_barcode}
+		</if>
+		and status in ('4' ,'5' )
 		<if test="w_out_start_date != null and w_out_start_date != '' ">
 			and w_out_date between #{w_out_start_date} and
 			#{w_out_end_date}
 		</if>
-		group by store_code,
-		style, color, size, order_degree
+		group by style, color, size, order_degree
 		order by
 		w_out_date desc ;
 	</select>
+
+
+	<select id="getWarehouseInOutGroupList"
+			resultType="com.alienasia.alienmw.dto.StoreInGroupListDTO">
+		select style, color, size, order_degree, count(epc) as
+		count
+		from rfid_info
+		where
+		<if test="w_in_box_barcode != null and w_in_box_barcode != '' ">
+			 w_in_box_barcode = #{w_in_box_barcode}
+		</if>
+		<if test="w_out_box_barcode != null and w_out_box_barcode != '' ">
+			w_out_box_barcode = #{w_out_box_barcode}
+		</if>
+		and status = #{status}
+		group by style, color, size, order_degree
+		order by
+		production_in_date desc ;
+	</select>
+
+
+
+
 
 
 	<select id="getStoreInventoryGroupList"

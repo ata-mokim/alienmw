@@ -26,7 +26,7 @@
           <el-button
             :loading="loading"
             class="login-button"
-            type="primary"
+            type="warning"
             native-type="submit"
             block
             icon="el-icon-lock"

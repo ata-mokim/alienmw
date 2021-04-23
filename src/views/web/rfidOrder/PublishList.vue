@@ -357,6 +357,10 @@ import XLSX from 'xlsx'
       this.confirmEndDateOption = this.$store.state.dateOption; // 조회조건에서 현재 날짜 
       this.$store.commit("dayBefore",7);
       this.confirmStartDateOption = this.$store.state.dateOption; // 조회조건이서 현재보다 -7 일
+      if (this.$store.state.userId != 'admin') {
+        // this.deptSeqOption = this.$store.state.deptSeq;
+        // this.deptNameOption = this.$store.state.deptName;
+      }
     },//created    
     data() {
       return {
@@ -402,6 +406,7 @@ import XLSX from 'xlsx'
         brandOption: '',
         styleOption :'',
         deptNameOption:'',
+        deptSeqOption:0,
         confirmStartDateOption:'',
         confirmEndDateOption:'',
         statusOption:'1',
@@ -423,6 +428,7 @@ import XLSX from 'xlsx'
         reqJson.brand = this.brandOption;
         reqJson.style = this.styleOption;
         reqJson.dept_name = this.deptNameOption;
+        // reqJson.dept_seq = this.deptSeqOption;
         reqJson.confirm_start_date = this.confirmStartDateOption;
         reqJson.confirm_end_date = this.confirmEndDateOption;
       
@@ -580,6 +586,32 @@ import XLSX from 'xlsx'
         if(this.multipleSelection==null || this.multipleSelection.length == 0 ){
           this.$message.error(this.$store.state.noDataSelect);
           return ;
+        }
+
+        for (var i in this.multipleSelection)
+        {
+          if (this.multipleSelection[i]['publish_start_number'] < 10)
+            this.multipleSelection[i]['publish_start_number'] = '00000' + this.multipleSelection[i]['publish_start_number']
+          else if (this.multipleSelection[i]['publish_start_number'] < 100)
+            this.multipleSelection[i]['publish_start_number'] = '0000' + this.multipleSelection[i]['publish_start_number']
+          else if (this.multipleSelection[i]['publish_start_number'] < 1000)
+            this.multipleSelection[i]['publish_start_number'] = '000' + this.multipleSelection[i]['publish_start_number']
+          else if (this.multipleSelection[i]['publish_start_number'] < 10000)
+            this.multipleSelection[i]['publish_start_number'] = '00' + this.multipleSelection[i]['publish_start_number']
+          else if (this.multipleSelection[i]['publish_start_number'] < 100000)
+            this.multipleSelection[i]['publish_start_number'] = '0' + this.multipleSelection[i]['publish_start_number']
+
+          if (this.multipleSelection[i]['publish_end_number'] < 10)
+            this.multipleSelection[i]['publish_end_number'] = '00000' + this.multipleSelection[i]['publish_end_number']
+          else if (this.multipleSelection[i]['publish_end_number'] < 100)
+            this.multipleSelection[i]['publish_end_number'] = '0000' + this.multipleSelection[i]['publish_end_number']
+          else if (this.multipleSelection[i]['publish_end_number'] < 1000)
+            this.multipleSelection[i]['publish_end_number'] = '000' + this.multipleSelection[i]['publish_end_number']
+          else if (this.multipleSelection[i]['publish_end_number'] < 10000)
+            this.multipleSelection[i]['publish_end_number'] = '00' + this.multipleSelection[i]['publish_end_number']
+          else if (this.multipleSelection[i]['publish_end_number'] < 100000)
+            this.multipleSelection[i]['publish_end_number'] = '0' + this.multipleSelection[i]['publish_end_number']
+
         }
 
         if (this.status != '2')

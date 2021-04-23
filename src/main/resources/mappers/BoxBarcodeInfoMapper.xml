@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.alienasia.alienmw.dao.BoxBarcodeInfoDAO"><!--namespace를 통해 UserDAO와 연결합니다. -->
+
+
+
+	<select id="read" resultType="com.alienasia.alienmw.dto.BoxBarcodeInfoDTO">
+		select w_out_box_barcode , store_Code, name as dept_name   From box_barcode_info a, dept_info b
+		where w_out_box_barcode = #{w_out_box_barcode} and store_code = b.dept_seq;
+	</select>
+
+
+
+
+</mapper>

@@ -222,7 +222,6 @@
         <el-input placeholder="Please input" v-model="scope.row.rfid_order_amount"></el-input>
        </template>
 
-
     </el-table-column>
 
    <el-table-column
@@ -293,8 +292,10 @@ import Axios from 'axios';
 
       // this.$store.state.accessToken
 
-      if (this.$store.state.userId != 'admin')
-       this.deptNameOption = this.$store.state.deptName;
+      if (this.$store.state.userId != 'admin') {
+        this.deptSeqOption = this.$store.state.deptSeq;
+        this.deptNameOption = this.$store.state.deptName;
+      }
 
     },//created
     data() {
@@ -325,6 +326,7 @@ import Axios from 'axios';
         brandOption: '',
         styleOption :'',
         deptNameOption:'',
+        deptSeqOption:0,
         requestStartDateOption:'',
         requestEndDateOption:'',
         statusOption:'',
@@ -343,7 +345,7 @@ import Axios from 'axios';
 
         reqJson.brand = this.brandOption;
         reqJson.style = this.styleOption;
-        reqJson.dept_name = this.deptNameOption;
+        reqJson.dept_seq = this.deptSeqOption;
         reqJson.request_start_date = this.requestStartDateOption;
         reqJson.request_end_date = this.requestEndDateOption;
 

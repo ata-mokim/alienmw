@@ -3,11 +3,9 @@ package com.alienasia.alienmw.controller;
 import java.util.List;
 
 import com.alienasia.alienmw.dao.RfidGetOrderDAO;
+import com.alienasia.alienmw.dao.RfidInfoDAO;
 import com.alienasia.alienmw.dao.RfidOrderDAO;
-import com.alienasia.alienmw.dto.DailyValueRes;
-import com.alienasia.alienmw.dto.RfidGetOrderDTO;
-import com.alienasia.alienmw.dto.RfidOrderDTO;
-import com.alienasia.alienmw.dto.RfidOrderRes;
+import com.alienasia.alienmw.dto.*;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,6 +32,8 @@ public class RfidOrderController {
 	private RfidOrderDAO service;
 	@Autowired
 	private RfidGetOrderDAO rfidGetOrderService;
+	@Autowired
+	private RfidInfoDAO rfidInfoService;
 
 	@RequestMapping(value = "/list", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
@@ -131,17 +131,51 @@ public class RfidOrderController {
 		RfidGetOrderDTO rfidGetOrderDTO = new RfidGetOrderDTO();
 
 		for (int i = 0; i < rfidOrderDTO.size(); i++) {
-
 			rfidOrderDTO.get(i).setStatus("5");
 			res = res + service.rfidTake(rfidOrderDTO.get(i));
-
-			//  update
+			//  rfidGetOrder update
 			rfidGetOrderDTO.setRfid_get_order_seq(rfidOrderDTO.get(i).getRfid_get_order_seq());
 			rfidGetOrderDTO.setRfid_take_amount(rfidOrderDTO.get(i).getRfid_take_amount());
 			rfidGetOrderService.rfidTake(rfidGetOrderDTO);
+			// rfidInfo update
+			RfidInfoDTO rfidInfoDTO = new RfidInfoDTO();
+			rfidInfoDTO.setUpd_user_id(rfidOrderDTO.get(i).getUpd_user_id());
+			rfidInfoDTO.setStatus("1");
+			rfidInfoDTO.setRfid_order_seq(rfidOrderDTO.get(i).getRfid_order_seq());
+			rfidInfoService.productionInUpdate(rfidInfoDTO) ;
 		}
 		return res;
 	}
+
+	@RequestMapping(value = "/rfidTakeEpcComplete", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
+			MediaType.APPLICATION_ATOM_XML_VALUE })
+	public int rfidTakeEpcComplete(@RequestBody RfidTakeEpcCompleteRes rfidTakeEpcCompleteRes ){
+
+		System.out.println("-------------/rfidOrder/rfidTakeEpcComplete-------");
+		System.out.println("--------------------" + rfidTakeEpcCompleteRes.getRfidOrderDTO().size());
+		System.out.println("--------------------" + rfidTakeEpcCompleteRes.getRfidOrderDTO());
+
+
+		int res = 0;
+		RfidGetOrderDTO rfidGetOrderDTO = new RfidGetOrderDTO();
+
+		for (int i = 0; i < rfidTakeEpcCompleteRes.getRfidOrderDTO().size(); i++) {
+			rfidTakeEpcCompleteRes.getRfidOrderDTO().get(i).setStatus("5");
+			res = res + service.rfidTake(rfidTakeEpcCompleteRes.getRfidOrderDTO().get(i));
+			//  update
+			rfidGetOrderDTO.setRfid_get_order_seq(rfidTakeEpcCompleteRes.getRfidOrderDTO().get(i).getRfid_get_order_seq());
+			rfidGetOrderDTO.setRfid_take_amount(rfidTakeEpcCompleteRes.getRfidOrderDTO().get(i).getRfid_take_amount());
+			rfidGetOrderService.rfidTake(rfidGetOrderDTO);
+		}
+
+		for (int i = 0; i < rfidTakeEpcCompleteRes.getRfidInfoDTO().size(); i++) {
+			rfidTakeEpcCompleteRes.getRfidInfoDTO().get(i).setStatus("1");
+			rfidInfoService.statusUpdate(rfidTakeEpcCompleteRes.getRfidInfoDTO().get(i));
+		}
+
+		return res;
+	}
+
 
 	@RequestMapping(value = "/remove", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
@@ -154,7 +188,7 @@ public class RfidOrderController {
 		int res = 0;
 
 		for (int i = 0; i < rfidOrderDTO.size(); i++) {
-			res = res + service.delete(rfidOrderDTO.get(i).getRfid_order_seq());
+			res = res + service.remove(rfidOrderDTO.get(i).getRfid_order_seq());
 		}
 		return res;
 	}

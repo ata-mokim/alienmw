@@ -207,6 +207,10 @@ import Axios from 'axios';
       this.$store.commit("dayBefore",7);
       this.requestStartDateOption = this.$store.state.dateOption; // 조회조건이서 현재보다 -7 일
 
+      if (this.$store.state.userId != 'admin') {
+        this.deptSeqOption = this.$store.state.deptSeq;
+        this.deptNameOption = this.$store.state.deptName;
+      }
       // this.$store.state.accessToken 
       // this.deptNameOption = this.$store.state.deptName;
     },//created
@@ -224,7 +228,8 @@ import Axios from 'axios';
         // 조회조건 관련 변수
         userIdOption: '',
         userNameOption :'',
-        deptNameOption :''
+        deptNameOption :'',
+        deptSeqOption:0,
       }
     },//data//
 
@@ -237,7 +242,8 @@ import Axios from 'axios';
 
         reqJson.user_id = this.userIdOption;
         reqJson.user_name = this.userNameOption;
-        reqJson.dept_name = this.deptNameOption;
+        // reqJson.dept_name = this.deptNameOption;
+        reqJson.dept_seq = this.deptSeqOption;
 
         
         await Axios.post(url, reqJson , this.$store.state.config ).then(res => { 

@@ -18,6 +18,10 @@
 			and dept_name = #{dept_name}
 		</if>
 
+		<if test="dept_seq != null and dept_seq != '' ">
+			and dept_seq = #{dept_seq}
+		</if>
+
 		<if test="request_start_date != null and request_start_date != '' ">
 			and request_date between #{request_start_date} and
 			#{request_end_date}
@@ -74,7 +78,7 @@
 		]]>
 	</update>
 
-	<delete id="delete">
+	<delete id="remove">
 		<![CDATA[
 		delete from rfid_get_order
 		where rfid_get_order_seq =  #{rfid_get_order_seq}
