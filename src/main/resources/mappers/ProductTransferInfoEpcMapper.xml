@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.alienasia.alienmw.dao.ProductTransferEpcInfoDAO"><!--namespace를 통해 UserDAO와 연결합니다. -->
+
+
+	<select id="getList" resultType="com.alienasia.alienmw.dto.ProductTransferEpcInfoDTO">
+		select * from product_transfer_epc_info where product_transfer_epc_info_seq > 0
+   	    <if test="product_transfer_num != null and product_transfer_num != '' ">
+			and product_transfer_num = #{product_transfer_num}
+		</if>
+		<if test="status != null and status != '' ">
+			and status  = #{status}
+		</if>
+		<if test="barcode != null and barcode != '' ">
+			and barcode = #{barcode}
+		</if>
+		order by product_transfer_epc_info_seq desc limit 100
+	</select>
+
+
+	<select id="getGroupList" resultType="com.alienasia.alienmw.dto.ProductTransferEpcInfoDTO">
+		select  barcode, style, color, size , count(barcode) as amount, order_degree, store_code from product_transfer_epc_info where product_transfer_epc_info_seq > 0
+		<if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
+		</if>
+		<if test="barcode != null and barcode != '' ">
+			and barcode = #{barcode}
+		</if>
+
+		<if test="status != null and status != '' ">
+			and status  = #{status}
+		</if>
+
+		<if test="status == null or status == '' ">
+			and status  = '0'
+		</if>
+
+		group by barcode, style,color, size, order_degree, store_code
+		order by reg_date desc limit 100
+	</select>
+
+
+
+	<insert id="insert">
+	<![CDATA[
+		    insert into product_transfer_epc_info
+							(    reg_date, reg_user_id ,product_transfer_info_seq , product_transfer_num  , epc, check_date, barcode
+							    , style, color, size, order_degree, store_code, status
+							 ) values
+			              ( now(), #{reg_user_id},#{product_transfer_info_seq} , #{product_transfer_num},#{epc},date_format(now(), '%Y-%m-%d'),#{barcode}
+			                    , #{style}, #{color}, #{size}, #{order_degree}, #{store_code}, '0'
+			              )
+			]]>
+	</insert>
+
+	<update id="productTransferInfoUpdate">
+	update product_transfer_info
+	set check_amount = check_amount -  (select count(product_transfer_info_seq)
+											from product_transfer_epc_info
+											where barcode =  #{barcode}
+											and style =  #{style}
+											and color =  #{color}
+											and size =  #{size}
+											and order_degree =  #{order_degree}
+											and status =  #{status}
+											<if test="store_code != null and store_code != '' ">
+												and store_code = #{store_code}
+											</if>
+											)
+	,upd_date = now()
+	,upd_user_id = #{upd_user_id}
+	where product_transfer_info_seq in (select product_transfer_info_seq
+	from product_transfer_epc_info
+	where barcode =  #{barcode}
+	and style =  #{style}
+	and color =  #{color}
+	and size =  #{size}
+	and order_degree =  #{order_degree}
+	and status =  #{status}
+<if test="store_code != null and store_code != '' ">
+  and store_code = #{store_code}
+</if>
+	 )
+	</update>
+
+
+
+	<delete id="remove">
+		delete from product_transfer_epc_info
+		where barcode =  #{barcode}
+        and style =  #{style}
+		and color =  #{color}
+		and size =  #{size}
+	    and order_degree =  #{order_degree}
+		and status =  #{status}
+			<if test="store_code != null and store_code != '' ">
+		  and store_code = #{store_code}
+			</if>
+	</delete>
+
+	<update id="statusUpdate">
+	update  product_transfer_epc_info
+	set
+	<if test="status == null or status == '' ">
+		 status  = '1'
+	</if>
+	<if test="status != null and status != '' ">
+		 status  = #{status}
+	</if>
+	,upd_date = now()
+	,upd_user_id = #{upd_user_id}
+	where
+	<if test="epc != null and epc != '' ">
+		epc  = #{epc}
+	</if>
+
+	<if test="barcode != null and barcode != '' ">
+		barcode =  #{barcode}
+		and style =  #{style}
+		and color =  #{color}
+		and size =  #{size}
+		and order_degree =  #{order_degree}
+	<if test="status == '1'">
+		and	status  = '0'
+	</if>
+	<if test="status == '2'">
+			and	status  = '1'
+	</if>
+
+	<if test="status == '3'">
+		and	status  = '2'
+	</if>
+	</if>
+		<if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
+		</if>
+	</update>
+
+
+	<update id="statusRemove">
+		update  product_transfer_epc_info
+		set
+		<if test="status != null and status != '' ">
+			status  = #{status}
+		</if>
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		where
+		<if test="epc != null and epc != '' ">
+			epc  = #{epc}
+		</if>
+
+		<if test="barcode != null and barcode != '' ">
+			barcode =  #{barcode}
+			and style =  #{style}
+			and color =  #{color}
+			and size =  #{size}
+			and order_degree =  #{order_degree}
+			<if test="status == '1'">
+				and	status  = '2'
+			</if>
+		</if>
+		<if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
+		</if>
+	</update>
+
+
+	<update id="storeMove">
+		update  rfid_info
+		set
+		status  = '6'
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		,store_code = #{receive_store_code}
+		where
+		epc  in ( select epc from product_transfer_epc_info
+		where
+			barcode =  #{barcode}
+			and style =  #{style}
+			and color =  #{color}
+			and size =  #{size}
+		    and order_degree =  #{order_degree}
+		 )
+	</update>
+
+
+	<update id="rfidInfoStatusUpdate">
+		<![CDATA[
+		update rfid_info
+		set status = '11'
+		  ,upd_date = now()
+		  ,upd_user_id = #{upd_user_id}
+		where epc in (select epc from product_transfer_epc_info where barcode =  #{barcode}
+														   and style =  #{style}
+														   and color =  #{color}
+														   and size =  #{size}
+		  													and order_degree =  #{order_degree}
+		)
+		]]>
+	</update>
+
+
+</mapper>

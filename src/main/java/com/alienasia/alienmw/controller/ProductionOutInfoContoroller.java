@@ -48,7 +48,7 @@ public class ProductionOutInfoContoroller {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public ProductionOutInfoRes getGroupList(@RequestBody ProductionOutInfoDTO productionOutInfoDTO) {
 
-		System.out.println("-------------/getGroupList/list-------");
+		System.out.println("-------------/ProductionOutInfo/getGroupList-------");
 		System.out.println(productionOutInfoDTO);
 		System.out.println("--------------------");
 
@@ -66,8 +66,8 @@ public class ProductionOutInfoContoroller {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int insert(@RequestBody List<ProductionOutInfoDTO> productionOutInfoDTO) {
 
-		 System.out.println("-------------/getGroupList/insert-------");
-		 System.out.println("--------------------" +  productionOutInfoDTO.size() );
+		 System.out.println("-------------/ProductionOutInfo/insert--------");
+		 System.out.println("--------------------" +  productionOutInfoDTO );
 		 int res = 0;
 			 
 		 
@@ -82,8 +82,8 @@ public class ProductionOutInfoContoroller {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int remove(@RequestBody List<ProductionOutInfoDTO> productionOutInfoDTO) {
 
-		System.out.println("-------------/getGroupList/remove-------");
-		System.out.println("--------------------" +  productionOutInfoDTO.size() );
+		System.out.println("-------------/ProductionOutInfo/remove-------");
+		System.out.println("--------------------" +  productionOutInfoDTO );
 		int res = 0;
 
 
@@ -99,7 +99,7 @@ public class ProductionOutInfoContoroller {
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public int productionOut(@RequestBody List<ProductionOutInfoDTO> productionOutInfoDTO) {
 
-		System.out.println("-------------/getGroupList/remove-------");
+		System.out.println("-------------/ProductionOutInfo/productionOut-------");
 		System.out.println("--------------------" +  productionOutInfoDTO.size() );
 		int res = 0;
 

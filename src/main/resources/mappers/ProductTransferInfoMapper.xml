@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.alienasia.alienmw.dao.ProductTransferInfoDAO"><!--namespace를 통해 UserDAO와 연결합니다. -->
+
+
+		<select id="getList" resultType="com.alienasia.alienmw.dto.ProductTransferInfoDTO">
+		select * from product_transfer_info where product_transfer_info_seq > 0
+		<if test="style != null and style != '' ">
+			and style = #{style}
+		</if>
+
+		<if test="color != null and color != '' ">
+			and color = #{color}
+		</if>
+
+		<if test="size != null and size != '' ">
+			and size = #{size}
+		</if>
+
+		<if test="order_degree != null and order_degree != '' ">
+			and order_degree = #{order_degree}
+		</if>
+
+		<if test="store_name != null and store_name != '' ">
+			and store_name = #{store_name}
+		</if>
+
+   	    <if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
+		</if>
+
+		<if test="request_start_date != null and request_start_date != '' ">
+			and request_date between #{request_start_date} and
+			#{request_end_date}
+		</if>
+
+		<if test="check_start_date != null and check_start_date != '' ">
+			and check_date between #{check_start_date} and
+			#{check_end_date}
+		</if>
+		<if test="status != null and status != '' ">
+			and status = #{status}
+		</if>
+		order by product_transfer_info_seq desc limit 100
+	</select>
+
+
+	<select id="getGroupList" resultType="com.alienasia.alienmw.dto.ProductTransferInfoDTO">
+		select
+		product_transfer_num,
+		product_transfer_name,
+		store_code,
+		store_name,
+		sum(amount) as total_count
+		from product_transfer_info  where product_transfer_info_seq > 0
+		<if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
+		</if>
+		<if test="store_name != null and store_name != '' ">
+			and store_name = #{store_name}
+		</if>
+		<if test="request_start_date != null and request_start_date != '' ">
+			and request_date between #{request_start_date} and
+			#{request_end_date}
+		</if>
+		group by product_transfer_num, product_transfer_name, store_code , store_name
+		order by reg_date desc limit 100
+	</select>
+
+
+	<select id="getGroupDetailList" resultType="com.alienasia.alienmw.dto.ProductTransferInfoDTO">
+		select
+				product_transfer_info_seq,
+		        product_transfer_num,
+		        product_transfer_name,
+		        store_code,
+		        store_name,
+		        style,
+			    color,
+		        size,
+		        order_degree,
+		        amount,
+				check_amount
+		from product_transfer_info  where product_transfer_info_seq > 0
+		<if test="product_transfer_num != null and product_transfer_num != '' ">
+			and product_transfer_num = #{product_transfer_num}
+		</if>
+
+		<if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
+		</if>
+		<if test="store_name != null and store_name != '' ">
+			and store_name = #{store_name}
+		</if>
+		<if test="request_start_date != null and request_start_date != '' ">
+			and request_date between #{request_start_date} and
+			#{request_end_date}
+		</if>
+-- 		group by product_transfer_num, product_transfer_name, store_code , store_name, style, color, size, order_degree
+		order by reg_date desc limit 100
+	</select>
+
+
+
+
+	<insert id="insert">
+	<![CDATA[
+		    insert into product_transfer_info
+							( product_transfer_num, reg_date, reg_user_id , product_transfer_name , store_code, store_name ,
+							style, color, size, order_degree, amount , request_date ) values
+			values         (#{product_transfer_num} , now(), #{reg_user_id}, #{product_transfer_name},#{store_code},#{store_name},
+				            #{style}, #{color}, #{size}, #{order_degree},#{amount}, date_format(now(), '%Y-%m-%d') )
+
+			]]>
+	</insert>
+
+
+
+	<update id="update">
+		<![CDATA[
+		update product_transfer_info
+		set check_amount = #{check_amount}
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		,request_date = date_format(now(), '%Y-%m-%d')
+		where product_transfer_info_seq =  #{product_transfer_info_seq}
+		]]>
+	</update>
+
+
+	<delete id="remove">
+		<![CDATA[
+		delete from product_transfer_info
+		where product_transfer_info_seq =  #{product_transfer_info_seq}
+		]]>
+	</delete>
+
+</mapper>

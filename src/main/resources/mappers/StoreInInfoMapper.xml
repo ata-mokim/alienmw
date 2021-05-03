@@ -16,19 +16,19 @@
 	</select>
 
 	<select id="getGroupList" resultType="com.alienasia.alienmw.dto.StoreInInfoDTO">
-		select  w_out_box_barcode, style, color, size , count(w_out_box_barcode) as amount from store_in_info where store_in_info_seq > 0
+		select  w_out_box_barcode, style, color, size , count(w_out_box_barcode) as amount , order_degree , store_code from store_in_info where store_in_info_seq > 0
 		<if test="store_code != null and store_code != '' ">
 			and store_code = #{store_code}
 		</if>
 		<if test="w_out_box_barcode != null and w_out_box_barcode != '' ">
 			and w_out_box_barcode = #{w_out_box_barcode}
 		</if>
-		group by w_out_box_barcode, style, color, size
+		group by w_out_box_barcode, style, color, size, order_degree, store_code
 		order by reg_date desc limit 100
 	</select>
 
 	<update id="rfidInfoStatusUpdate">
-		<![CDATA[
+
 		update rfid_info
 		set status = '6'
 		,upd_date = now()
@@ -36,17 +36,30 @@
 		, store_in_date = date_format(now(), '%Y-%m-%d')
 		  where epc in (select epc from store_in_info where w_out_box_barcode =  #{w_out_box_barcode}
 	        and style =  #{style}
+            and color =  #{color}
+			and size =  #{size}
+			and order_degree =  #{order_degree}
+			  <if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
+			  </if>
 			)
-		]]>
+
 	</update>
 
 
 
 	<delete id="remove">
-		<![CDATA[
+
 		delete from store_in_info
 		where w_out_box_barcode =  #{w_out_box_barcode}
-		]]>
+		  and style =  #{style}
+		  and color =  #{color}
+		  and size =  #{size}
+		  and order_degree =  #{order_degree}
+			<if test="store_code != null and store_code != '' ">
+		  and store_code = #{store_code}
+			</if>
+
 	</delete>
 
 

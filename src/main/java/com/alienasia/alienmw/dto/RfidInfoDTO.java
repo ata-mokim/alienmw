@@ -53,6 +53,7 @@ public class RfidInfoDTO {
 	  private String store_in_date;
 	  private String store_sale_date;	
 	  private String store_return_date;
+	  private String return_box_barcode;
 	  
 	  private String store_in_start_date;
 	  private String store_in_end_date;

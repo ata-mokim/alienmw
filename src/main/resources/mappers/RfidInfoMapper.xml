@@ -59,6 +59,10 @@
 				test="w_out_box_barcode != null and w_out_box_barcode != '' ">
 			and w_out_box_barcode = #{w_out_box_barcode}
 		</if>
+		<if
+				test="return_box_barcode != null and return_box_barcode != '' ">
+			and return_box_barcode = #{return_box_barcode}
+		</if>
 
 		<if test="store_code != null and store_code != '' ">
 			and store_code = #{store_code}
@@ -301,7 +305,20 @@
 	</select>
 
 
-
+	<select id="getWarehouseReturnInGroupList"
+			resultType="com.alienasia.alienmw.dto.StoreInGroupListDTO">
+		select style, color, size, order_degree, count(epc) as
+		count
+		from rfid_info
+		where
+		<if test="return_box_barcode != null and return_box_barcode != '' ">
+			return_box_barcode = #{return_box_barcode}
+		</if>
+		and status = #{status}
+		group by style, color, size, order_degree
+		order by
+		production_in_date desc ;
+	</select>
 
 
 

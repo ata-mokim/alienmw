@@ -10,10 +10,7 @@ import java.util.List;
 @Data
 @Setter
 @Getter
-public class RfidTakeEpcCompleteRes  {
+public class HoReturnEpcInfoRes extends CommonAPIResult {
 	@Autowired
-	private List<RfidOrderDTO> rfidOrderDTO;
-
-	@Autowired
-	private List<RfidInfoDTO> rfidInfoDTO;
+	private List<HoReturnEpcInfoDTO> hoReturnEpcInfoDTO;
 }

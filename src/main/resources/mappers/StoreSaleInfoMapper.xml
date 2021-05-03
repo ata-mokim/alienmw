@@ -13,37 +13,46 @@
 	</select>
 
 	<select id="getGroupList" resultType="com.alienasia.alienmw.dto.StoreSaleInfoDTO">
-		select   store_code, style , color, size , count(style) as amount , b.name as store_name  from store_sale_info a, dept_info b
+		select   store_code, style , color, size , count(style) as amount , b.name as store_name , order_degree from store_sale_info a, dept_info b
 		where store_sale_info_seq > 0
 		<if test="store_code != null and store_code != '' ">
 			and a.store_code = #{store_code}
 		</if>
 		and b.dept_seq = a.store_code
-		group by store_code, style, color, size
+		group by store_code, style, color, size, order_degree
 		order by a.reg_date desc limit 100
 	</select>
 
 	<update id="rfidInfoStatusUpdate">
-		<![CDATA[
+
 		update rfid_info
 		set status = '7'
 		,upd_date = now()
 		,upd_user_id = #{upd_user_id}
 		, store_sale_date = date_format(now(), '%Y-%m-%d')
 		  where epc in (select epc from store_sale_info where store_code = #{store_code} and style = #{style}
+		and color =  #{color}
+		and size =  #{size}
+		and order_degree =  #{order_degree}
 			)
 			OR	rfid_tag in (select epc from store_sale_info where store_code = #{store_code} and style = #{style}
+																 and color =  #{color}
+																 and size =  #{size}
+																 and order_degree =  #{order_degree}
 			)
-		]]>
+
 	</update>
 
 
 
 	<delete id="remove">
-		<![CDATA[
+
 		delete from store_sale_info
 		where store_code = #{store_code} and style = #{style}
-		]]>
+		  and color =  #{color}
+		  and size =  #{size}
+		  and order_degree =  #{order_degree}
+
 	</delete>
 
 

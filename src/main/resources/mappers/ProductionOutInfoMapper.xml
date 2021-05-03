@@ -16,19 +16,18 @@
 	</select>
 
 	<select id="getGroupList" resultType="com.alienasia.alienmw.dto.ProductionOutInfoDTO">
-		select  w_in_box_barcode, style , color, size,  count(w_in_box_barcode) as amount from production_out_info where production_out_info_seq > 0
+		select  w_in_box_barcode, style , color, size,  count(w_in_box_barcode) as amount , order_degree from production_out_info where production_out_info_seq > 0
 		<if test="dept_seq != null and dept_seq != '' ">
 			and dept_seq = #{dept_seq}
 		</if>
 		<if test="w_in_box_barcode != null and w_in_box_barcode != '' ">
 			and w_in_box_barcode = #{w_in_box_barcode}
 		</if>
-		group by w_in_box_barcode, style, color, size
+		group by w_in_box_barcode, style, color, size, order_degree
 		order by reg_date desc limit 100
 	</select>
 
 	<update id="rfidInfoStatusUpdate">
-		<![CDATA[
 		update rfid_info
 		set status = '2'
 		,upd_date = now()
@@ -37,17 +36,27 @@
 		, production_out_date = date_format(now(), '%Y-%m-%d')
 		  where epc in (select epc from production_out_info where w_in_box_barcode =  #{w_in_box_barcode}
 	        and style =  #{style}
+			and color =  #{color}
+			and size =  #{size}
+			and order_degree =  #{order_degree}
+			  <if test="dept_seq != null and dept_seq != '' ">
+			and dept_seq = #{dept_seq}
+			  </if>
 			)
-		]]>
 	</update>
 
 
 
 	<delete id="remove">
-		<![CDATA[
 		delete from production_out_info
 		where w_in_box_barcode =  #{w_in_box_barcode}
-		]]>
+		  and style =  #{style}
+		  and color =  #{color}
+		  and size =  #{size}
+		  and order_degree =  #{order_degree}
+		<if test="dept_seq != null and dept_seq != '' ">
+		  and dept_seq = #{dept_seq}
+		</if>
 	</delete>
 
 

@@ -24,6 +24,8 @@ public interface RfidInfoDAO {
 	public List<StoreInGroupListDTO> getStoreInGroupList(RfidInfoDTO rfidInfoDTO);
 	public List<StoreInGroupListDTO> getStoreInventoryGroupList(StoreInGroupListReq stroreInGroupListReq);
 	public List<StoreInGroupListDTO> getWarehouseInOutGroupList(RfidInfoDTO rfidInfoDTO);
+	public List<StoreInGroupListDTO> getWarehouseReturnInGroupList(RfidInfoDTO rfidInfoDTO);
+
 
 	public int update (RfidInfoDTO rfidInfoDTO);
 	public int rfidTake (RfidInfoDTO rfidInfoDTO);

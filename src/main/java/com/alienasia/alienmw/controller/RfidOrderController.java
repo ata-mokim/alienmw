@@ -149,28 +149,28 @@ public class RfidOrderController {
 
 	@RequestMapping(value = "/rfidTakeEpcComplete", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
-	public int rfidTakeEpcComplete(@RequestBody RfidTakeEpcCompleteRes rfidTakeEpcCompleteRes ){
+	public int rfidTakeEpcComplete(@RequestBody RfidTakeEpcCompleteReq rfidTakeEpcCompleteReq ){
 
 		System.out.println("-------------/rfidOrder/rfidTakeEpcComplete-------");
-		System.out.println("--------------------" + rfidTakeEpcCompleteRes.getRfidOrderDTO().size());
-		System.out.println("--------------------" + rfidTakeEpcCompleteRes.getRfidOrderDTO());
+		System.out.println("--------------------" + rfidTakeEpcCompleteReq.getRfidOrderDTO().size());
+		System.out.println("--------------------" + rfidTakeEpcCompleteReq.getRfidOrderDTO());
 
 
 		int res = 0;
 		RfidGetOrderDTO rfidGetOrderDTO = new RfidGetOrderDTO();
 
-		for (int i = 0; i < rfidTakeEpcCompleteRes.getRfidOrderDTO().size(); i++) {
-			rfidTakeEpcCompleteRes.getRfidOrderDTO().get(i).setStatus("5");
-			res = res + service.rfidTake(rfidTakeEpcCompleteRes.getRfidOrderDTO().get(i));
+		for (int i = 0; i < rfidTakeEpcCompleteReq.getRfidOrderDTO().size(); i++) {
+			rfidTakeEpcCompleteReq.getRfidOrderDTO().get(i).setStatus("5");
+			res = res + service.rfidTake(rfidTakeEpcCompleteReq.getRfidOrderDTO().get(i));
 			//  update
-			rfidGetOrderDTO.setRfid_get_order_seq(rfidTakeEpcCompleteRes.getRfidOrderDTO().get(i).getRfid_get_order_seq());
-			rfidGetOrderDTO.setRfid_take_amount(rfidTakeEpcCompleteRes.getRfidOrderDTO().get(i).getRfid_take_amount());
+			rfidGetOrderDTO.setRfid_get_order_seq(rfidTakeEpcCompleteReq.getRfidOrderDTO().get(i).getRfid_get_order_seq());
+			rfidGetOrderDTO.setRfid_take_amount(rfidTakeEpcCompleteReq.getRfidOrderDTO().get(i).getRfid_take_amount());
 			rfidGetOrderService.rfidTake(rfidGetOrderDTO);
 		}
 
-		for (int i = 0; i < rfidTakeEpcCompleteRes.getRfidInfoDTO().size(); i++) {
-			rfidTakeEpcCompleteRes.getRfidInfoDTO().get(i).setStatus("1");
-			rfidInfoService.statusUpdate(rfidTakeEpcCompleteRes.getRfidInfoDTO().get(i));
+		for (int i = 0; i < rfidTakeEpcCompleteReq.getRfidInfoDTO().size(); i++) {
+			rfidTakeEpcCompleteReq.getRfidInfoDTO().get(i).setStatus("1");
+			rfidInfoService.statusUpdate(rfidTakeEpcCompleteReq.getRfidInfoDTO().get(i));
 		}
 
 		return res;

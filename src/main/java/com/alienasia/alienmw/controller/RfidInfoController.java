@@ -227,6 +227,29 @@ public class RfidInfoController {
 		return stroreInGroupListRes;
 	}
 
+	@RequestMapping(value = "/getWarehouseReturnInGroupList", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
+			MediaType.APPLICATION_ATOM_XML_VALUE })
+	public StoreInGroupListRes getWarehouseReturnInGroupList(@RequestBody RfidInfoDTO rfidInfoDTO) {
+
+		System.out.println("-------------/rfidInfo/getWarehouseReturnInGroupList-------");
+		System.out.println(rfidInfoDTO);
+
+		StoreInGroupListRes stroreInGroupListRes = new StoreInGroupListRes();
+
+		if ("".equals(rfidInfoDTO.getStatus()) || null == rfidInfoDTO.getStatus()) {
+			rfidInfoDTO.setStatus("2");
+		}
+
+		stroreInGroupListRes.setStoreInGroupListDTO(service.getWarehouseReturnInGroupList(rfidInfoDTO));
+		stroreInGroupListRes.setResultCode(1);
+		stroreInGroupListRes.setResultMessage("success");
+
+		System.out.println(stroreInGroupListRes);
+
+		return stroreInGroupListRes;
+	}
+
+
 
 
 //	@RequestMapping(value = "/storeInventoryGroupList", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,

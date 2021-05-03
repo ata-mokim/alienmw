@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.alienasia.alienmw.dao.HoReturnInfoDAO"><!--namespace를 통해 UserDAO와 연결합니다. -->
+
+
+		<select id="getList" resultType="com.alienasia.alienmw.dto.HoReturnInfoDTO">
+		select * from ho_return_info where ho_return_info_seq > 0
+		<if test="style != null and style != '' ">
+			and style = #{style}
+		</if>
+
+		<if test="color != null and color != '' ">
+			and color = #{color}
+		</if>
+
+		<if test="size != null and size != '' ">
+			and size = #{size}
+		</if>
+
+		<if test="order_degree != null and order_degree != '' ">
+			and order_degree = #{order_degree}
+		</if>
+
+		<if test="store_name != null and store_name != '' ">
+			and store_name = #{store_name}
+		</if>
+
+   	    <if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
+		</if>
+
+		<if test="request_start_date != null and request_start_date != '' ">
+			and request_date between #{request_start_date} and
+			#{request_end_date}
+		</if>
+
+		<if test="check_start_date != null and check_start_date != '' ">
+			and check_date between #{check_start_date} and
+			#{check_end_date}
+		</if>
+		<if test="status != null and status != '' ">
+			and status = #{status}
+		</if>
+		order by ho_return_info_seq desc limit 100
+	</select>
+
+
+	<select id="getGroupList" resultType="com.alienasia.alienmw.dto.HoReturnInfoDTO">
+		select
+		ho_return_num,
+		ho_return_name,
+		store_code,
+		store_name,
+		sum(amount) as total_count
+		from ho_return_info  where ho_return_info_seq > 0
+		<if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
+		</if>
+		<if test="store_name != null and store_name != '' ">
+			and store_name = #{store_name}
+		</if>
+		<if test="request_start_date != null and request_start_date != '' ">
+			and request_date between #{request_start_date} and
+			#{request_end_date}
+		</if>
+		group by ho_return_num, ho_return_name, store_code , store_name
+		order by reg_date desc limit 100
+	</select>
+
+
+	<select id="getGroupDetailList" resultType="com.alienasia.alienmw.dto.HoReturnInfoDTO">
+		select
+				ho_return_info_seq,
+		        ho_return_num,
+		        ho_return_name,
+		        store_code,
+		        store_name,
+		        style,
+			    color,
+		        size,
+		        order_degree,
+		        amount,
+				check_amount
+		from ho_return_info  where ho_return_info_seq > 0
+		<if test="ho_return_num != null and ho_return_num != '' ">
+			and ho_return_num = #{ho_return_num}
+		</if>
+
+		<if test="store_code != null and store_code != '' ">
+			and store_code = #{store_code}
+		</if>
+		<if test="store_name != null and store_name != '' ">
+			and store_name = #{store_name}
+		</if>
+		<if test="request_start_date != null and request_start_date != '' ">
+			and request_date between #{request_start_date} and
+			#{request_end_date}
+		</if>
+-- 		group by ho_return_num, ho_return_name, store_code , store_name, style, color, size, order_degree
+		order by reg_date desc limit 100
+	</select>
+
+
+
+
+	<insert id="insert">
+	<![CDATA[
+		    insert into ho_return_info
+							( ho_return_num, reg_date, reg_user_id , ho_return_name , store_code, store_name ,
+							style, color, size, order_degree, amount , request_date ) values
+			values         (#{ho_return_num} , now(), #{reg_user_id}, #{ho_return_name},#{store_code},#{store_name},
+				            #{style}, #{color}, #{size}, #{order_degree},#{amount}, date_format(now(), '%Y-%m-%d') )
+
+			]]>
+	</insert>
+
+
+
+	<update id="update">
+		<![CDATA[
+		update ho_return_info
+		set check_amount = #{check_amount}
+		,upd_date = now()
+		,upd_user_id = #{upd_user_id}
+		,request_date = date_format(now(), '%Y-%m-%d')
+		where ho_return_info_seq =  #{ho_return_info_seq}
+		]]>
+	</update>
+
+
+	<delete id="remove">
+		<![CDATA[
+		delete from ho_return_info
+		where ho_return_info_seq =  #{ho_return_info_seq}
+		]]>
+	</delete>
+
+</mapper>

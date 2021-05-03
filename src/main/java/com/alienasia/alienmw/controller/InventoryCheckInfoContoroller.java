@@ -1,7 +1,9 @@
 package com.alienasia.alienmw.controller;
 
+import com.alienasia.alienmw.dao.InventoryCheckEpcInfoDAO;
 import com.alienasia.alienmw.dao.RfidInfoDAO;
 import com.alienasia.alienmw.dao.InventoryCheckInfoDAO;
+import com.alienasia.alienmw.dto.InventoryCheckEpcInfoReq;
 import com.alienasia.alienmw.dto.InventoryCheckInfoDTO;
 import com.alienasia.alienmw.dto.InventoryCheckInfoRes;
 import org.mybatis.spring.annotation.MapperScan;
@@ -22,6 +24,9 @@ public class InventoryCheckInfoContoroller {
 
 	@Autowired
 	private InventoryCheckInfoDAO service;
+
+	@Autowired
+	private InventoryCheckEpcInfoDAO epcService;
 
 
 	@RequestMapping(value = "/getList", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
@@ -68,6 +73,26 @@ public class InventoryCheckInfoContoroller {
 		return inventoryCheckInfoRes;
 	}
 
+
+//	@RequestMapping(value = "/insert", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
+//			MediaType.APPLICATION_ATOM_XML_VALUE })
+//	public int insert(@RequestBody InventoryCheckEpcInfoReq inventoryCheckEpcInfoReq) {
+//
+//		System.out.println("-------------/InventoryCheckInfo/insert-------");
+//		System.out.println("--------------------" +  inventoryCheckEpcInfoReq);
+//		int res = 0;
+//
+//		for(int i=0 ; i< inventoryCheckEpcInfoReq.getInventoryCheckEpcInfoDTO().size()  ; i++) {
+//			res = res + epcService.insert(inventoryCheckEpcInfoReq.getInventoryCheckEpcInfoDTO().get(i)) ;
+//		}
+//
+//		for(int i=0 ; i< inventoryCheckEpcInfoReq.getInventoryCheckInfoDTO().size()  ; i++) {
+//			res = res + service.insert(inventoryCheckEpcInfoReq.getInventoryCheckInfoDTO().get(i)) ;
+//		}
+//
+//		return res ;
+//	}
+
 	
 	@RequestMapping(value = "/insert", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
@@ -76,14 +101,17 @@ public class InventoryCheckInfoContoroller {
 		 System.out.println("-------------/InventoryCheckInfo/insert-------");
 		 System.out.println("--------------------" +  inventoryCheckInfoDTO);
 		 int res = 0;
-			 
-		 
+
+
 		 for(int i=0 ; i< inventoryCheckInfoDTO.size()  ; i++) {
 			 res = res + service.insert(inventoryCheckInfoDTO.get(i)) ;
 		 }
-		 
+
 		 return res ;
 	}
+
+
+
 
 	@RequestMapping(value = "/remove", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
@@ -103,15 +131,20 @@ public class InventoryCheckInfoContoroller {
 
 	@RequestMapping(value = "/update", produces = { MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
-	public int update(@RequestBody List<InventoryCheckInfoDTO> inventoryCheckInfoDTO) {
+	public int update(@RequestBody InventoryCheckEpcInfoReq inventoryCheckEpcInfoReq) {
 
-		System.out.println("-------------/InventoryCheckInfo/update-------");
-		System.out.println("--------------------" +  inventoryCheckInfoDTO );
+		System.out.println("-------------/InventoryCheckInfo/insert-------");
+		System.out.println("--------------------" +  inventoryCheckEpcInfoReq.getInventoryCheckEpcInfoDTO());
+		System.out.println("--------------------" +  inventoryCheckEpcInfoReq.getInventoryCheckInfoDTO());
+
 		int res = 0;
 
+		for(int i=0 ; i< inventoryCheckEpcInfoReq.getInventoryCheckEpcInfoDTO().size()  ; i++) {
+		    epcService.insert(inventoryCheckEpcInfoReq.getInventoryCheckEpcInfoDTO().get(i)) ;
+		}
 
-		for(int i=0 ; i< inventoryCheckInfoDTO.size()  ; i++) {
-			res = res + service.update(inventoryCheckInfoDTO.get(i)) ;
+		for(int i=0 ; i< inventoryCheckEpcInfoReq.getInventoryCheckInfoDTO().size()  ; i++) {
+			res = res + service.update(inventoryCheckEpcInfoReq.getInventoryCheckInfoDTO().get(i)) ;
 		}
 
 		return res ;

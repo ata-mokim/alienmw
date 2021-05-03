@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.alienasia.alienmw.dao.InventoryCheckEpcInfoDAO"><!--namespace를 통해 UserDAO와 연결합니다. -->
+
+
+	<select id="getList" resultType="com.alienasia.alienmw.dto.InventoryCheckEpcInfoDTO">
+		select * from inventory_check_epc_info where inventory_check_epc_info_seq > 0
+   	    <if test="inventory_check_num != null and inventory_check_num != '' ">
+			and inventory_check_num = #{inventory_check_num}
+		</if>
+		order by inventory_check_epc_info_seq desc limit 100
+	</select>
+
+
+
+	<insert id="insert">
+	<![CDATA[
+		    insert into inventory_check_epc_info
+							(    reg_date, reg_user_id ,inventory_check_info_seq , inventory_check_num  , epc, check_date ) values
+			              ( now(), #{reg_user_id},#{inventory_check_info_seq} , #{inventory_check_num},#{epc},date_format(now(), '%Y-%m-%d') )
+			]]>
+	</insert>
+
+
+	<delete id="remove">
+		<![CDATA[
+		delete from inventory_check_epc_info
+		where inventory_check_epc_info_seq =  #{inventory_check_epc_info_seq}
+		]]>
+	</delete>
+
+</mapper>
